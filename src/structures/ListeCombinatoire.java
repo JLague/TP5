@@ -1,6 +1,7 @@
 package structures;
 
 import java.util.List;
+import java.util.ArrayList;
 import exceptions.ConstructeurException;
 
 /**
@@ -137,7 +138,14 @@ public class ListeCombinatoire
 	// TODO genererEnsembleValeurs - Compléter le code de la méthode
 	public List<Integer> genererEnsembleValeurs()
 	{
-		return null;
+		List<Integer> liste = new ArrayList<Integer>();
+		
+		for (int i = this.debutEns; i < this.finEns; i++)
+		{
+			liste.add(i);
+		}
+		
+		return liste;
 	}
 
 	/**
