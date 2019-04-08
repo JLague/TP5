@@ -30,7 +30,30 @@ public class MatriceUtilitaires
 	// TODO toStringMat - Compléter le code de la méthode
 	public static String toStringMat(int[][] mat)
 	{
-		return "";
+		String s = "";
+		
+		for (int i = 0; i < mat.length; i++)
+		{
+			s += "[";
+			
+			for (int j = 0; j < mat[i].length; j++)
+			{
+				s += mat[i][j];
+				
+				if (j != mat[i].length - 1)
+				{
+					s += ", ";
+				}
+			}
+			
+			s += "]";
+			
+			if (i != mat.length - 1)
+			{
+				s += "\n";
+			}
+		}
+		return s;
 	}
 
 	/**
@@ -47,7 +70,18 @@ public class MatriceUtilitaires
 	// TODO getMatTranspose - Compléter le code de la méthode
 	public static int[][] getMatTranspose(int[][] mat)
 	{
-		return null;
+		int longueur = mat.length;
+		int[][] trans = new int[longueur][longueur];
+		
+		for (int i = 0; i < longueur; i++)
+		{
+			for (int j = 0; j < longueur; j++)
+			{
+				trans[j][i] = mat[i][j];
+			}
+		}
+		
+		return trans;
 	}
 
 	/**
@@ -67,7 +101,29 @@ public class MatriceUtilitaires
 	 */
 	private static int[][] getMatMineur(int[][] mat, int ligne, int col)
 	{
-		return null;
+		int longueur = mat.length;
+		int[][] mineur = new int[longueur - 1][longueur - 1];
+		int x = 0;
+		int y = 0;
+		
+		for (int i = 0; i < longueur; i++)
+		{
+			if (i != ligne)
+			{
+				for (int j = 0; j < longueur; j++)
+				{
+					if (j != col)
+					{
+						mineur[x][y] = mat[i][j];
+						y++;
+					}
+				}
+				y = 0;
+				x++;
+			}
+		}
+		
+		return mineur;
 	}
 
 	/**
@@ -83,7 +139,17 @@ public class MatriceUtilitaires
 	// TODO getMatMultScalaire - Compléter le code de la méthode
 	public static int[][] getMatMultScalaire(int[][] mat, float scalaire)
 	{
-		return null;
+		int longueur = mat.length;
+		
+		for (int i = 0; i < longueur; i++)
+		{
+			for(int j = 0; j < longueur; j++)
+			{
+				mat[i][j] = (int) (mat[i][j] * scalaire);
+			}
+		}
+		
+		return mat;
 	}
 
 	/**
@@ -99,7 +165,15 @@ public class MatriceUtilitaires
 	// TODO getMatModuloX - Compléter le code de la méthode
 	public static int[][] getMatModuloX(int[][] mat, int mod)
 	{
-		return null;
+		for (int i = 0; i < mat.length; i++)
+		{
+			for (int j = 0; j < mat[i].length; j++)
+			{
+				mat[i][j] = MathUtilitaires.modulo(mat[i][j], mod);
+			}
+		}
+		
+		return mat;
 	}
 
 	/**
@@ -177,5 +251,4 @@ public class MatriceUtilitaires
 
 		return detInv;
 	}
-
 }
