@@ -20,8 +20,15 @@ public class MathUtilitaires
 	 */
 	// TODO fact - Compléter le code de la méthode
 	public static double fact(int valFact)
-	{
-		return 0;
+	{	
+		double rep = 1;
+		
+		if (valFact >= 1)
+		{
+			rep = valFact == 1 ? valFact : valFact * fact(valFact - 1);
+		}
+		
+		return rep;
 	}
 
 	/**
@@ -150,7 +157,17 @@ public class MathUtilitaires
 	// TODO alea - Compléter le code de la méthode
 	public static int alea(int pMin, int pMax)
 	{
-		return 0;
+		int temp = 0;
+		
+		if (pMin > pMax)
+		{
+			// Pérmuter les deux valeurs
+			temp = pMin;
+			pMin = pMax;
+			pMax = temp;
+		}
+		
+		return (int) (Math.random() * (pMax - pMin + 1)) + pMin;
 	}
 
 	/**
@@ -172,5 +189,4 @@ public class MathUtilitaires
 				/ MathUtilitaires.fact(nbrElement - nbrElementPris))
 				/ MathUtilitaires.fact(nbrElementPris));
 	}
-
 }
