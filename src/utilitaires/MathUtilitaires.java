@@ -1,6 +1,7 @@
 package utilitaires;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Classe utilitaires pour les calculs mathématiques
@@ -20,14 +21,14 @@ public class MathUtilitaires
 	 */
 	// TODO fact - Compléter le code de la méthode
 	public static double fact(int valFact)
-	{	
+	{
 		double rep = 1;
-		
+
 		if (valFact >= 1)
 		{
 			rep = valFact == 1 ? valFact : valFact * fact(valFact - 1);
 		}
-		
+
 		return rep;
 	}
 
@@ -51,7 +52,16 @@ public class MathUtilitaires
 	// TODO modulo - Compléter le code de la méthode
 	public static int modulo(int pVal, int pMod) throws ArithmeticException
 	{
-		return 0;
+		int rep = 0;
+
+		if (pMod != 0)
+		{
+			rep = pVal - pMod * Math.floorDiv(pVal, pMod);
+		}
+		else
+			throw new ArithmeticException("Division par zéro");
+
+		return rep;
 	}
 
 	/**
@@ -67,7 +77,20 @@ public class MathUtilitaires
 	// TODO diviseursDe - Compléter le code de la méthode
 	public static SortedSet<Integer> diviseursDe(int pVal)
 	{
-		return null;
+		SortedSet<Integer> diviseurs = new TreeSet<Integer>();
+
+		if (pVal != 0)
+		{
+			for (int i = 1; i <= Math.abs(pVal); i++)
+			{
+				if (modulo(pVal, i) == 0)
+				{
+					diviseurs.add(i);
+				}
+			}
+		}
+
+		return diviseurs.isEmpty() ? null : diviseurs;
 	}
 
 	/**
@@ -83,7 +106,7 @@ public class MathUtilitaires
 	// TODO estPremier - Compléter le code de la méthode
 	public static boolean estPremier(int pVal)
 	{
-		return true;
+		return diviseursDe(pVal).size() == 2;
 	}
 
 	/**
@@ -97,7 +120,17 @@ public class MathUtilitaires
 	// TODO xPremier - Compléter le code de la méthode
 	public static SortedSet<Integer> xPremier(int pVal)
 	{
-		return null;
+		SortedSet<Integer> premiers = new TreeSet<Integer>();
+
+		for (int i = 1; i < pVal; i++)
+		{
+			if (estPremier(i))
+			{
+				premiers.add(i);
+			}
+		}
+
+		return premiers.isEmpty() ? null : premiers;
 	}
 
 	/**
@@ -115,7 +148,21 @@ public class MathUtilitaires
 	// TODO PGCD - Compléter le code de la méthode
 	public static int PGCD(int pVal1, int pVal2)
 	{
-		return 0;
+		int temp = 0;
+		int mod = 0;
+
+		// Pérmuter si pVal2 est plus grand que pVal1
+		if (pVal1 < pVal2)
+		{
+			temp = pVal1;
+			pVal1 = pVal2;
+			pVal2 = temp;
+		}
+
+		mod = modulo(pVal1, pVal2);
+
+		return mod == 0 ? pVal2 : PGCD(pVal2, mod);
+
 	}
 
 	/**
@@ -142,7 +189,20 @@ public class MathUtilitaires
 	// TODO xPremierEntreEux - Compléter le code de la méthode
 	public static SortedSet<Integer> xPremierEntreEux(int valDepart, int valRef)
 	{
-		return null;
+		SortedSet<Integer> premiersEntreEux = new TreeSet<Integer>();
+
+		// Met valDepart à 1 si négative
+		valDepart = valDepart < 0 ? 1 : valDepart;
+
+		for (int i = valDepart; i < valRef; i++)
+		{
+			if (PGCD(i, valRef) == 1)
+			{
+				premiersEntreEux.add(i);
+			}
+		}
+
+		return premiersEntreEux.isEmpty() ? null : premiersEntreEux;
 	}
 
 	/**
@@ -158,7 +218,7 @@ public class MathUtilitaires
 	public static int alea(int pMin, int pMax)
 	{
 		int temp = 0;
-		
+
 		if (pMin > pMax)
 		{
 			// Pérmuter les deux valeurs
@@ -166,7 +226,7 @@ public class MathUtilitaires
 			pMin = pMax;
 			pMax = temp;
 		}
-		
+
 		return (int) (Math.random() * (pMax - pMin + 1)) + pMin;
 	}
 
