@@ -71,12 +71,13 @@ public class MatriceUtilitaires
 	// TODO getMatTranspose - Compléter le code de la méthode
 	public static int[][] getMatTranspose(int[][] mat)
 	{
-		int longueur = mat.length;
-		int[][] trans = new int[longueur][longueur];
+		int hauteur = mat.length;
+		int largeur = mat[0].length;
+		int[][] trans = new int[largeur][hauteur];
 
-		for (int i = 0; i < longueur; i++)
+		for (int i = 0; i < hauteur; i++)
 		{
-			for (int j = 0; j < longueur; j++)
+			for (int j = 0; j < largeur; j++)
 			{
 				trans[j][i] = mat[i][j];
 			}
