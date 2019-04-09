@@ -1,7 +1,13 @@
 package utilitaires;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.swing.JFileChooser;
 
@@ -25,7 +31,26 @@ public class FichierUtilitaires
 	// TODO enregistrerMessage - Compléter le code de la méthode
 	public static boolean enregistrerMessage(String message, File nomFichier)
 	{
-		return true;
+		boolean enregistre = false;
+		PrintWriter sortie = null;
+
+		try
+		{
+			sortie = new PrintWriter(new FileWriter(nomFichier));
+			sortie.println(message);
+			enregistre = true;
+		}
+		catch (IOException e)
+		{
+			System.err.println(e);
+		}
+		finally
+		{
+			sortie.flush();
+			sortie.close();
+		}
+
+		return enregistre;
 	}
 
 	/**
@@ -38,7 +63,31 @@ public class FichierUtilitaires
 	// TODO lireMessage - Compléter le code de la méthode
 	public static String lireMessage(File nomFichier)
 	{
-		return "";
+		String ligne = null;
+		BufferedReader entree = null;
+
+		try
+		{
+			entree = new BufferedReader(new FileReader(nomFichier));
+			ligne = entree.readLine();
+		}
+		catch (IOException e)
+		{
+			System.err.println(e);
+		}
+		finally
+		{
+			try
+			{
+				entree.close();
+			}
+			catch (IOException e)
+			{
+				System.err.println(e);
+			}
+		}
+
+		return ligne;
 	}
 
 	/**
@@ -48,13 +97,41 @@ public class FichierUtilitaires
 	 *
 	 * @param nomFichier le nom du fichier dictionnaire
 	 *
-	 * @return un SortedSet des mots du dictionnaire ou null s'il n'y a pas de mot
-	 *         dans le fichier.
+	 * @return un SortedSet des mots du dictionnaire ou null s'il n'y a pas de
+	 *         mot dans le fichier.
 	 */
 	// TODO lireDictionnaire - Compléter le code de la méthode
 	public static SortedSet<String> lireDictionnaire(File nomDic)
 	{
-		return null;
+		String ligne = null;
+		BufferedReader entree = null;
+		SortedSet<String> dictionnaire = new TreeSet<String>();
+
+		try
+		{
+			entree = new BufferedReader(new FileReader(nomDic));
+			while ((ligne = entree.readLine()) != null)
+			{
+				dictionnaire.add(ligne.trim().toLowerCase());
+			}
+		}
+		catch (IOException e)
+		{
+			System.err.println(e);
+		}
+		finally
+		{
+			try
+			{
+				entree.close();
+			}
+			catch (IOException e)
+			{
+				System.err.println(e);
+			}
+		}
+
+		return dictionnaire.isEmpty() ? null : dictionnaire;
 	}
 
 	/**
@@ -95,5 +172,10 @@ public class FichierUtilitaires
 			f = chooser.getSelectedFile();
 
 		return f;
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(enregistrerMessage("Fuck off", obtenirNomFichier("Fuck you")));
 	}
 }
