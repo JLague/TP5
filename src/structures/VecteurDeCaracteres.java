@@ -49,10 +49,10 @@ public class VecteurDeCaracteres
 	public VecteurDeCaracteres(char[] tabChar) throws ConstructeurException
 	{
 		this.tableCaracteres = new ArrayList<Character>();
-		
+
 		if (tabChar.length > 0)
 		{
-			for(char c : tabChar)
+			for (char c : tabChar)
 			{
 				tableCaracteres.add(Character.toUpperCase(c));
 			}
@@ -86,18 +86,18 @@ public class VecteurDeCaracteres
 	// TODO getIndice - Compléter le code de la méthode
 	public int getIndice(char car)
 	{
-//		int indice = -1;
-//		
-//		for(int i = 0; i < this.getTaille(); i++)
-//		{
-//			if(this.tableCaracteres.get(i) == car)
-//			{
-//				indice = i;
-//			}
-//		}
-//		
-//		return indice;
-		
+		// int indice = -1;
+		//
+		// for(int i = 0; i < this.getTaille(); i++)
+		// {
+		// if(this.tableCaracteres.get(i) == car)
+		// {
+		// indice = i;
+		// }
+		// }
+		//
+		// return indice;
+
 		return this.tableCaracteres.indexOf(car);
 	}
 
