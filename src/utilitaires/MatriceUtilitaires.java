@@ -6,7 +6,8 @@ import java.util.SortedSet;
 /**
  * Classe utilitaires pour la gestion des matrices carrées
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Justin Lagüe
  */
 public class MatriceUtilitaires
 {
@@ -31,23 +32,23 @@ public class MatriceUtilitaires
 	public static String toStringMat(int[][] mat)
 	{
 		String s = "";
-		
+
 		for (int i = 0; i < mat.length; i++)
 		{
 			s += "[";
-			
+
 			for (int j = 0; j < mat[i].length; j++)
 			{
 				s += mat[i][j];
-				
+
 				if (j != mat[i].length - 1)
 				{
 					s += ", ";
 				}
 			}
-			
+
 			s += "]";
-			
+
 			if (i != mat.length - 1)
 			{
 				s += "\n";
@@ -72,7 +73,7 @@ public class MatriceUtilitaires
 	{
 		int longueur = mat.length;
 		int[][] trans = new int[longueur][longueur];
-		
+
 		for (int i = 0; i < longueur; i++)
 		{
 			for (int j = 0; j < longueur; j++)
@@ -80,7 +81,7 @@ public class MatriceUtilitaires
 				trans[j][i] = mat[i][j];
 			}
 		}
-		
+
 		return trans;
 	}
 
@@ -105,7 +106,7 @@ public class MatriceUtilitaires
 		int[][] mineur = new int[longueur - 1][longueur - 1];
 		int x = 0;
 		int y = 0;
-		
+
 		for (int i = 0; i < longueur; i++)
 		{
 			if (i != ligne)
@@ -122,7 +123,7 @@ public class MatriceUtilitaires
 				x++;
 			}
 		}
-		
+
 		return mineur;
 	}
 
@@ -140,15 +141,15 @@ public class MatriceUtilitaires
 	public static int[][] getMatMultScalaire(int[][] mat, float scalaire)
 	{
 		int longueur = mat.length;
-		
+
 		for (int i = 0; i < longueur; i++)
 		{
-			for(int j = 0; j < longueur; j++)
+			for (int j = 0; j < longueur; j++)
 			{
 				mat[i][j] = (int) (mat[i][j] * scalaire);
 			}
 		}
-		
+
 		return mat;
 	}
 
@@ -172,7 +173,7 @@ public class MatriceUtilitaires
 				mat[i][j] = MathUtilitaires.modulo(mat[i][j], mod);
 			}
 		}
-		
+
 		return mat;
 	}
 

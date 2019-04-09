@@ -6,7 +6,8 @@ import java.util.TreeSet;
 /**
  * Classe utilitaires pour les calculs mathématiques
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Justin Lagüe
  */
 public class MathUtilitaires
 {

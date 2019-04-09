@@ -14,7 +14,8 @@ import javax.swing.JFileChooser;
 /**
  * Classe utilitaires pour la gestion de fichiers
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Justin Lagüe
  */
 public class FichierUtilitaires
 {
@@ -173,9 +174,10 @@ public class FichierUtilitaires
 
 		return f;
 	}
-	
+
 	public static void main(String[] args)
 	{
-		System.out.println(enregistrerMessage("Fuck off", obtenirNomFichier("Fuck you")));
+		System.out.println(
+				enregistrerMessage("Fuck off", obtenirNomFichier("Fuck you")));
 	}
 }

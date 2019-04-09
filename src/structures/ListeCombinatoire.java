@@ -12,7 +12,8 @@ import exceptions.ConstructeurException;
  * Voir les combinatoires sur "Wikipédia" :
  * https://fr.wikipedia.org/wiki/Combinatoire
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Justin Lagüe
  */
 public class ListeCombinatoire
 {
@@ -139,12 +140,12 @@ public class ListeCombinatoire
 	public List<Integer> genererEnsembleValeurs()
 	{
 		List<Integer> liste = new ArrayList<Integer>();
-		
+
 		for (int i = this.debutEns; i < this.finEns; i++)
 		{
 			liste.add(i);
 		}
-		
+
 		return liste;
 	}
 
@@ -166,8 +167,8 @@ public class ListeCombinatoire
 	}
 
 	/**
-	 * Permet de construire une chaîne de caractères structurée pour afficher les
-	 * infos d'un objet ListeCombinatoire.
+	 * Permet de construire une chaîne de caractères structurée pour afficher
+	 * les infos d'un objet ListeCombinatoire.
 	 *
 	 * Évolue selon le développement...
 	 *

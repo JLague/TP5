@@ -8,7 +8,8 @@ import exceptions.ConstructeurException;
  * Classe qui permet de produire une liste de caractères selon une constante ou
  * selon un tableau de caractères reçu.
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Justin Lagüe
  *
  */
 
@@ -64,7 +65,7 @@ public class VecteurDeCaracteres
 	}
 
 	/**
-	 * Retourne l'indice, dans le vecteur de caractères, du caractère reçu 
+	 * Retourne l'indice, dans le vecteur de caractères, du caractère reçu
 	 *
 	 * @param car le caractère à trouver
 	 *
@@ -88,8 +89,8 @@ public class VecteurDeCaracteres
 	}
 
 	/**
-	 * Permet de construire une chaîne de caractères structurée pour afficher les
-	 * infos d'un objet VecteurDeCaracteres
+	 * Permet de construire une chaîne de caractères structurée pour afficher
+	 * les infos d'un objet VecteurDeCaracteres
 	 *
 	 * <pre>
 	 * Exemple de sortie voulue:
