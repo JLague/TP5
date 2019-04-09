@@ -42,6 +42,18 @@ public class ListeCombinatoire
 	public ListeCombinatoire(int pValDebut, int pValFin, int pLongCombinaison)
 			throws ConstructeurException
 	{
+		if (validerLimitesEns(pValDebut, pValFin) && validerLongCombinaison(
+				pLongCombinaison, pValFin - pValDebut))
+		{
+			setLimitesEns(pValDebut, pValFin);
+			setLongCombinaison(pLongCombinaison);
+
+			setEnsembleValeurs(genererEnsembleValeurs());
+			// setListeDeCombinaisons(produireListeCombinaisons(this.ensembleValeurs,
+		}
+		else
+			throw new ConstructeurException(
+					"Un ou des paramètres sont invalides");
 	}
 
 	public int getDebutEns()
@@ -188,6 +200,10 @@ public class ListeCombinatoire
 	@Override
 	public String toString()
 	{
-		return "";
+		return "Limite de l'ensemble : [" + this.debutEns + ", " + this.finEns
+				+ "]\nLongueur combinaison : " + this.longCombinaison
+				+ "\nEnsemble : " + getEnsembleValeurs() + "\nVoici les "
+				+ getTailleListeDeCombinaisons() + "combinaisons : "
+				+ getListeDeCombinaisons();
 	}
 }
