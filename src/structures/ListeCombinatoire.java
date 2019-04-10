@@ -176,10 +176,19 @@ public class ListeCombinatoire
 	private void produireListeCombinaisons(List<Integer> pEnsembleValeurs,
 			int pLongueurRestante, List<Integer> pCombinaisonCourante)
 	{
-		for (int i = longCombinaison; i > 0; i--)
+		int chiffre = 0;
+		
+		for (int i = longCombinaison - 1; i >= 0; i--)
 		{
+			chiffre = pCombinaisonCourante.get(i);
 			
+			if (chiffre < this.finEns)
+			{
+				pCombinaisonCourante.set(i, chiffre + 1);
+			}
 		}
+		
+		listeDeCombinaisons.add(pCombinaisonCourante);
 		
 	}
 
