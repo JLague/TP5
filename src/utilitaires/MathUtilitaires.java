@@ -250,4 +250,9 @@ public class MathUtilitaires
 				/ MathUtilitaires.fact(nbrElement - nbrElementPris))
 				/ MathUtilitaires.fact(nbrElementPris));
 	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(diviseursDe(0));
+	}
 }

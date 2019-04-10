@@ -174,10 +174,4 @@ public class FichierUtilitaires
 
 		return f;
 	}
-
-	public static void main(String[] args)
-	{
-		System.out.println(
-				enregistrerMessage("Fuck off", obtenirNomFichier("Fuck you")));
-	}
 }

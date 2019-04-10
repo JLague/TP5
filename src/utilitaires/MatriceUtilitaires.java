@@ -147,7 +147,7 @@ public class MatriceUtilitaires
 		{
 			for (int j = 0; j < longueur; j++)
 			{
-				mat[i][j] = (int) (mat[i][j] * scalaire);
+				mat[i][j] = (int) Math.floor(mat[i][j] * scalaire);
 			}
 		}
 

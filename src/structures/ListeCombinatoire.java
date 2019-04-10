@@ -153,7 +153,7 @@ public class ListeCombinatoire
 	{
 		List<Integer> liste = new ArrayList<Integer>();
 
-		for (int i = this.debutEns; i < this.finEns; i++)
+		for (int i = this.debutEns; i <= this.finEns; i++)
 		{
 			liste.add(i);
 		}
@@ -176,6 +176,11 @@ public class ListeCombinatoire
 	private void produireListeCombinaisons(List<Integer> pEnsembleValeurs,
 			int pLongueurRestante, List<Integer> pCombinaisonCourante)
 	{
+		for (int i = longCombinaison; i > 0; i--)
+		{
+			
+		}
+		
 	}
 
 	/**
