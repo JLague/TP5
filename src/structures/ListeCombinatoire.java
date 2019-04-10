@@ -177,18 +177,25 @@ public class ListeCombinatoire
 			int pLongueurRestante, List<Integer> pCombinaisonCourante)
 	{
 		int chiffre = 0;
-		
-		for (int i = longCombinaison - 1; i >= 0; i--)
+		if(pLongueurRestante != 0)
 		{
-			chiffre = pCombinaisonCourante.get(i);
-			
-			if (chiffre < this.finEns)
+			for (int i = longCombinaison - 1; i >= 0; i--)
 			{
-				pCombinaisonCourante.set(i, chiffre + 1);
+				chiffre = pCombinaisonCourante.get(i);
+				
+				if (chiffre < this.finEns && chiffre == pCombinaisonCourante.get(longCombinaison - 1))
+				{
+					
+					pCombinaisonCourante.set(i, chiffre + 1);
+				}
+				else()
 			}
+			
+			produireListeCombinaison()
+			
+			listeDeCombinaisons.add(pCombinaisonCourante);
 		}
 		
-		listeDeCombinaisons.add(pCombinaisonCourante);
 		
 	}
 
