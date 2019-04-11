@@ -34,7 +34,7 @@ public class MatriceUtilitaires
 	public static String toStringMat(int[][] mat)
 	{
 		String s = "";
-		
+
 		for (int i = 0; i < mat.length; i++)
 		{
 			s += "[";
@@ -51,7 +51,7 @@ public class MatriceUtilitaires
 
 			s += "]\n";
 		}
-		
+
 		return s;
 	}
 
@@ -139,17 +139,25 @@ public class MatriceUtilitaires
 	// TODO getMatMultScalaire - Compléter le code de la méthode
 	public static int[][] getMatMultScalaire(int[][] mat, float scalaire)
 	{
-		int longueur = mat.length;
-
-		for (int i = 0; i < longueur; i++)
+		int hauteur = mat.length;
+		int largeur = 0;
+		int[][] matM = mat.clone();
+		
+		if (hauteur > 0)
 		{
-			for (int j = 0; j < longueur; j++)
+			largeur = mat[0].length;
+			matM = new int[hauteur][largeur];
+
+			for (int i = 0; i < hauteur; i++)
 			{
-				mat[i][j] = (int) Math.floor(mat[i][j] * scalaire);
+				for (int j = 0; j < largeur; j++)
+				{
+					matM[i][j] = (int) Math.floor(mat[i][j] * scalaire);
+				}
 			}
 		}
 
-		return mat;
+		return matM;
 	}
 
 	/**

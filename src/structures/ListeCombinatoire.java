@@ -248,7 +248,7 @@ public class ListeCombinatoire
 	public static void main(String[] args)
 	{
 		ListeCombinatoire liste = new ListeCombinatoire(1, 5, 3);
-		ListeCombinatoire liste2 = new ListeCombinatoire(1, 20, 4);
+		ListeCombinatoire liste2 = new ListeCombinatoire(1, 20, 5);
 
 		System.out.println(liste);
 		System.out.println(liste2);

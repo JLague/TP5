@@ -105,11 +105,27 @@ public class MatriceUtilitairesTest
 		int[][] grosseMatM = MatriceUtilitaires.getMatMultScalaire(grosseMat, 5.5f);
 		int[][] rectangleM = MatriceUtilitaires.getMatMultScalaire(rectangle, 173.432f);
 		
-		for(int i = 0; i < matT.length; i++)
+		for(int i = 0; i < matM.length; i++)
 		{
-			for (int j = 0; j < matT[i].length; j++)
+			for (int j = 0; j < matM[i].length; j++)
 			{
-				assertEquals(matT[i][j], matM[i][j]);
+				assertEquals(matM[i][j], mat[i][j] * 5);
+			}
+		}
+		
+		for(int i = 0; i < grosseMatM.length; i++)
+		{
+			for (int j = 0; j < grosseMatM[i].length; j++)
+			{
+				assertTrue(grosseMatM[i][j] == Math.floor(grosseMat[i][j] * 5.5f));
+			}
+		}
+		
+		for(int i = 0; i < rectangleM.length; i++)
+		{
+			for (int j = 0; j < rectangleM[i].length; j++)
+			{
+				assertTrue(rectangleM[i][j] == Math.floor(rectangle[i][j] * 173.432f));
 			}
 		}
 	}
