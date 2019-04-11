@@ -102,8 +102,16 @@ public class MatriceUtilitairesTest
 	public void testGetMatMultScalaire()
 	{
 		int[][] matM = MatriceUtilitaires.getMatMultScalaire(mat, 5);
-		int[][] grosseMatM = MatriceUtilitaires.getMatMultScalaire(grosseMat, 5);
-		int[][] rectangleM = MatriceUtilitaires.getMatMultScalaire(rectangle, 5);
+		int[][] grosseMatM = MatriceUtilitaires.getMatMultScalaire(grosseMat, 5.5f);
+		int[][] rectangleM = MatriceUtilitaires.getMatMultScalaire(rectangle, 173.432f);
+		
+		for(int i = 0; i < matT.length; i++)
+		{
+			for (int j = 0; j < matT[i].length; j++)
+			{
+				assertEquals(matT[i][j], matM[i][j]);
+			}
+		}
 	}
 
 	@Test

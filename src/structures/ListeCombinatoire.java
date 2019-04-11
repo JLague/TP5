@@ -19,7 +19,7 @@ import utilitaires.MathUtilitaires;
 public class ListeCombinatoire
 {
 	public static final int VALEUR_ENS_MIN = 0;
-	public static final int VALEUR_ENS_MAX = 50;
+	public static final int VALEUR_ENS_MAX = 100;
 	public static final int LONGUEUR_COMBINAISON_MIN = 1;
 
 	private int debutEns = 0;
@@ -56,13 +56,13 @@ public class ListeCombinatoire
 
 			setListeDeCombinaisons(new ArrayList<List<Integer>>());
 
-			for(int i = 0; i < this.longCombinaison; i++)
+			for (int i = 0; i < this.longCombinaison; i++)
 			{
 				listeVide.add(0);
 			}
-			
-			produireListeCombinaisons(this.ensembleValeurs, this.longCombinaison,
-					listeVide, 0);
+
+			produireListeCombinaisons(this.ensembleValeurs,
+					this.longCombinaison, listeVide);
 		}
 		else
 			throw new ConstructeurException(
@@ -187,82 +187,31 @@ public class ListeCombinatoire
 	// TODO produireListeCombinaisons - MANDAT 1 ou 2 - Compléter le code de la
 	// méthode
 	private void produireListeCombinaisons(List<Integer> pEnsembleValeurs,
-			int pLongueurRestante, List<Integer> pCombinaisonCourante, int pDebut)
+			int pLongueurRestante, List<Integer> pCombinaisonCourante)
 	{
-		// int chiffre = 0;
-		// if(pLongueurRestante != 0)
-		// {
-		// for (int i = longCombinaison - 1; i >= 0; i--)
-		// {
-		// chiffre = pCombinaisonCourante.get(i);
-		//
-		// if (chiffre < this.finEns && chiffre ==
-		// pCombinaisonCourante.get(longCombinaison - 1))
-		// {
-		//
-		// pCombinaisonCourante.set(i, chiffre + 1);
-		// }
-		// else()
-		// }
-		//
-		// produireListeCombinaison()
-		//
-		// listeDeCombinaisons.add(pCombinaisonCourante);
-		// }
-
-		// boolean estModif = false;
-		// int index = this.longCombinaison - 1;
-		// Integer chiffre = 0;
-		// List<Integer> combinaison = new ArrayList<Integer>();
-		//
-		// if (pLongueurRestante > 0)
-		// {
-		// if (pCombinaisonCourante.isEmpty())
-		// {
-		// for (int i = 0; i < this.longCombinaison; i++)
-		// {
-		// combinaison.add(pEnsembleValeurs.get(i));
-		// }
-		// }
-		// else
-		// {
-		// combinaison = new ArrayList<Integer>(pCombinaisonCourante);
-		//
-		// while (index >= 0 && !estModif)
-		// {
-		// chiffre = pCombinaisonCourante.get(index) + 1;
-		// if (pEnsembleValeurs.contains(chiffre)
-		// || (index < this.longCombinaison - 1
-		// && chiffre < combinaison
-		// .get(index + 1)))
-		// {
-		// combinaison.set(index, chiffre);
-		// estModif = true;
-		// }
-		// index--;
-		// }
-		// }
-		//
-		// this.listeDeCombinaisons.add(combinaison);
-		// produireListeCombinaisons(pEnsembleValeurs, pLongueurRestante - 1,
-		// combinaison);
-		// }
-
-		if (pLongueurRestante != 0)
+		if (pLongueurRestante > 0)
 		{
-			for (int i = pDebut; i <= pEnsembleValeurs.size()
+			for (int i = 0; i <= pEnsembleValeurs.size()
 					- pLongueurRestante; i++)
 			{
+				// Ajoute l'élément de l'ensemble à la combinaison
 				pCombinaisonCourante.set(
 						this.longCombinaison - pLongueurRestante,
 						pEnsembleValeurs.get(i));
-				produireListeCombinaisons(pEnsembleValeurs,
-						pLongueurRestante - 1, pCombinaisonCourante, i + 1);
+
+				// Remplit le reste de la combinaison
+				produireListeCombinaisons(
+						pEnsembleValeurs.subList(i + 1,
+								pEnsembleValeurs.size()),
+						pLongueurRestante - 1, pCombinaisonCourante);
 			}
 		}
 		else
 		{
-			listeDeCombinaisons.add(new ArrayList<Integer>(pCombinaisonCourante));
+			// Ajoute la combinaison courante à la liste si la longueur est plus
+			// grande que 0
+			listeDeCombinaisons
+					.add(new ArrayList<Integer>(pCombinaisonCourante));
 		}
 
 	}

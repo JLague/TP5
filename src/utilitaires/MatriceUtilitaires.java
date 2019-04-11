@@ -2,6 +2,8 @@ package utilitaires;
 
 import java.util.Iterator;
 import java.util.SortedSet;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Classe utilitaires pour la gestion des matrices carrées
@@ -32,7 +34,7 @@ public class MatriceUtilitaires
 	public static String toStringMat(int[][] mat)
 	{
 		String s = "";
-
+		
 		for (int i = 0; i < mat.length; i++)
 		{
 			s += "[";
@@ -47,13 +49,9 @@ public class MatriceUtilitaires
 				}
 			}
 
-			s += "]";
-
-			if (i != mat.length - 1)
-			{
-				s += "\n";
-			}
+			s += "]\n";
 		}
+		
 		return s;
 	}
 
