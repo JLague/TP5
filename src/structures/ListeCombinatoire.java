@@ -3,6 +3,7 @@ package structures;
 import java.util.List;
 import java.util.ArrayList;
 import exceptions.ConstructeurException;
+import utilitaires.MathUtilitaires;
 
 /**
  * Classe qui permet de produire une liste de listes de combinaison d'entiers
@@ -42,6 +43,9 @@ public class ListeCombinatoire
 	public ListeCombinatoire(int pValDebut, int pValFin, int pLongCombinaison)
 			throws ConstructeurException
 	{
+		// int nbrCombinaisons = 0;
+		List<Integer> listeVide = new ArrayList<Integer>();
+
 		if (validerLimitesEns(pValDebut, pValFin) && validerLongCombinaison(
 				pLongCombinaison, pValFin - pValDebut))
 		{
@@ -49,7 +53,16 @@ public class ListeCombinatoire
 			setLongCombinaison(pLongCombinaison);
 
 			setEnsembleValeurs(genererEnsembleValeurs());
-			// setListeDeCombinaisons(produireListeCombinaisons(this.ensembleValeurs,
+
+			setListeDeCombinaisons(new ArrayList<List<Integer>>());
+
+			for(int i = 0; i < this.longCombinaison; i++)
+			{
+				listeVide.add(0);
+			}
+			
+			produireListeCombinaisons(this.ensembleValeurs, this.longCombinaison,
+					listeVide, 0);
 		}
 		else
 			throw new ConstructeurException(
@@ -174,29 +187,84 @@ public class ListeCombinatoire
 	// TODO produireListeCombinaisons - MANDAT 1 ou 2 - Compléter le code de la
 	// méthode
 	private void produireListeCombinaisons(List<Integer> pEnsembleValeurs,
-			int pLongueurRestante, List<Integer> pCombinaisonCourante)
+			int pLongueurRestante, List<Integer> pCombinaisonCourante, int pDebut)
 	{
-		int chiffre = 0;
-		if(pLongueurRestante != 0)
+		// int chiffre = 0;
+		// if(pLongueurRestante != 0)
+		// {
+		// for (int i = longCombinaison - 1; i >= 0; i--)
+		// {
+		// chiffre = pCombinaisonCourante.get(i);
+		//
+		// if (chiffre < this.finEns && chiffre ==
+		// pCombinaisonCourante.get(longCombinaison - 1))
+		// {
+		//
+		// pCombinaisonCourante.set(i, chiffre + 1);
+		// }
+		// else()
+		// }
+		//
+		// produireListeCombinaison()
+		//
+		// listeDeCombinaisons.add(pCombinaisonCourante);
+		// }
+
+		// boolean estModif = false;
+		// int index = this.longCombinaison - 1;
+		// Integer chiffre = 0;
+		// List<Integer> combinaison = new ArrayList<Integer>();
+		//
+		// if (pLongueurRestante > 0)
+		// {
+		// if (pCombinaisonCourante.isEmpty())
+		// {
+		// for (int i = 0; i < this.longCombinaison; i++)
+		// {
+		// combinaison.add(pEnsembleValeurs.get(i));
+		// }
+		// }
+		// else
+		// {
+		// combinaison = new ArrayList<Integer>(pCombinaisonCourante);
+		//
+		// while (index >= 0 && !estModif)
+		// {
+		// chiffre = pCombinaisonCourante.get(index) + 1;
+		// if (pEnsembleValeurs.contains(chiffre)
+		// || (index < this.longCombinaison - 1
+		// && chiffre < combinaison
+		// .get(index + 1)))
+		// {
+		// combinaison.set(index, chiffre);
+		// estModif = true;
+		// }
+		// index--;
+		// }
+		// }
+		//
+		// this.listeDeCombinaisons.add(combinaison);
+		// produireListeCombinaisons(pEnsembleValeurs, pLongueurRestante - 1,
+		// combinaison);
+		// }
+
+		if (pLongueurRestante != 0)
 		{
-			for (int i = longCombinaison - 1; i >= 0; i--)
+			for (int i = pDebut; i <= pEnsembleValeurs.size()
+					- pLongueurRestante; i++)
 			{
-				chiffre = pCombinaisonCourante.get(i);
-				
-				if (chiffre < this.finEns && chiffre == pCombinaisonCourante.get(longCombinaison - 1))
-				{
-					
-					pCombinaisonCourante.set(i, chiffre + 1);
-				}
-				else()
+				pCombinaisonCourante.set(
+						this.longCombinaison - pLongueurRestante,
+						pEnsembleValeurs.get(i));
+				produireListeCombinaisons(pEnsembleValeurs,
+						pLongueurRestante - 1, pCombinaisonCourante, i + 1);
 			}
-			
-			produireListeCombinaison()
-			
-			listeDeCombinaisons.add(pCombinaisonCourante);
 		}
-		
-		
+		else
+		{
+			listeDeCombinaisons.add(new ArrayList<Integer>(pCombinaisonCourante));
+		}
+
 	}
 
 	/**
@@ -224,7 +292,16 @@ public class ListeCombinatoire
 		return "Limite de l'ensemble : [" + this.debutEns + ", " + this.finEns
 				+ "]\nLongueur combinaison : " + this.longCombinaison
 				+ "\nEnsemble : " + getEnsembleValeurs() + "\nVoici les "
-				+ getTailleListeDeCombinaisons() + "combinaisons : "
+				+ getTailleListeDeCombinaisons() + " combinaisons : "
 				+ getListeDeCombinaisons();
+	}
+
+	public static void main(String[] args)
+	{
+		ListeCombinatoire liste = new ListeCombinatoire(1, 5, 3);
+		ListeCombinatoire liste2 = new ListeCombinatoire(1, 20, 4);
+
+		System.out.println(liste);
+		System.out.println(liste2);
 	}
 }
