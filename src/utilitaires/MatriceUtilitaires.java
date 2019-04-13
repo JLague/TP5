@@ -139,21 +139,13 @@ public class MatriceUtilitaires
 	// TODO getMatMultScalaire - Compléter le code de la méthode
 	public static int[][] getMatMultScalaire(int[][] mat, float scalaire)
 	{
-		int hauteur = mat.length;
-		int largeur = 0;
-		int[][] matM = mat.clone();
-		
-		if (hauteur > 0)
-		{
-			largeur = mat[0].length;
-			matM = new int[hauteur][largeur];
+		int[][] matM = getMatCopieProfonde(mat);
 
-			for (int i = 0; i < hauteur; i++)
+		for (int i = 0; i < mat.length; i++)
+		{
+			for (int j = 0; j < mat[i].length; j++)
 			{
-				for (int j = 0; j < largeur; j++)
-				{
-					matM[i][j] = (int) Math.floor(mat[i][j] * scalaire);
-				}
+				matM[i][j] = (int) Math.floor(mat[i][j] * scalaire);
 			}
 		}
 
@@ -173,15 +165,17 @@ public class MatriceUtilitaires
 	// TODO getMatModuloX - Compléter le code de la méthode
 	public static int[][] getMatModuloX(int[][] mat, int mod)
 	{
+		int[][] matMod = getMatCopieProfonde(mat);
+
 		for (int i = 0; i < mat.length; i++)
 		{
 			for (int j = 0; j < mat[i].length; j++)
 			{
-				mat[i][j] = MathUtilitaires.modulo(mat[i][j], mod);
+				matMod[i][j] = MathUtilitaires.modulo(matMod[i][j], mod);
 			}
 		}
 
-		return mat;
+		return matMod;
 	}
 
 	/**
@@ -258,5 +252,26 @@ public class MatriceUtilitaires
 		}
 
 		return detInv;
+	}
+
+	/**
+	 * Permet de faire une copie profonde de la matrice passée en paramètre, car
+	 * mat.clone() ne fait qu'une copie de surface et les éléments de la matrice
+	 * d'origine sont alors modifiés
+	 * 
+	 * @param mat la matrice d'origine
+	 * 
+	 * @return une copie de la matrice
+	 */
+	private static int[][] getMatCopieProfonde(int[][] mat)
+	{
+		int[][] copie = new int[mat.length][];
+
+		for (int i = 0; i < mat.length; i++)
+		{
+			copie[i] = mat[i].clone();
+		}
+
+		return copie;
 	}
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
 
+import utilitaires.MathUtilitaires;
 import utilitaires.MatriceUtilitaires;
 
 public class MatriceUtilitairesTest
@@ -39,15 +40,14 @@ public class MatriceUtilitairesTest
 	{
 		// Tests visuels
 		System.out.println(MatriceUtilitaires.toStringMat(mat));
-		System.out.println();
 		System.out.println(MatriceUtilitaires.toStringMat(grosseMat));
-		System.out.println();
 		System.out.println(MatriceUtilitaires.toStringMat(rectangle));
 	}
 
 	@Test
 	public void testGetMatTranspose()
 	{
+		// Transposées manuellement
 		int[][] matT = new int[][]
 		{
 				{ 6, -2, -3 },
@@ -69,71 +69,105 @@ public class MatriceUtilitairesTest
 				{ 3, 7 },
 				{ 4, 8 } };
 
+		// Transposées automatiquement
 		int[][] matTranspose = MatriceUtilitaires.getMatTranspose(mat);
-		int[][] grosseMatTranspose = MatriceUtilitaires.getMatTranspose(grosseMat);
-		int[][] rectangleTranspose = MatriceUtilitaires.getMatTranspose(rectangle);
+		int[][] grosseMatTranspose = MatriceUtilitaires
+				.getMatTranspose(grosseMat);
+		int[][] rectangleTranspose = MatriceUtilitaires
+				.getMatTranspose(rectangle);
 
-		for(int i = 0; i < matT.length; i++)
-		{
-			for (int j = 0; j < matT[i].length; j++)
-			{
-				assertEquals(matT[i][j], matTranspose[i][j]);
-			}
-		}
-		
-		for(int i = 0; i < grosseMatT.length; i++)
-		{
-			for (int j = 0; j < grosseMatT[i].length; j++)
-			{
-				assertEquals(grosseMatT[i][j], grosseMatTranspose[i][j]);
-			}
-		}
-		
-		for(int i = 0; i < rectangleT.length; i++)
-		{
-			for (int j = 0; j < rectangleT[i].length; j++)
-			{
-				assertEquals(rectangleT[i][j], rectangleTranspose[i][j]);
-			}
-		}
+		// Tests
+		boucleTestTranspose(matT, matTranspose);
+		boucleTestTranspose(grosseMatT, grosseMatTranspose);
+		boucleTestTranspose(rectangleT, rectangleTranspose);
 	}
 
 	@Test
 	public void testGetMatMultScalaire()
 	{
+		// Matrices multipliées
 		int[][] matM = MatriceUtilitaires.getMatMultScalaire(mat, 5);
-		int[][] grosseMatM = MatriceUtilitaires.getMatMultScalaire(grosseMat, 5.5f);
-		int[][] rectangleM = MatriceUtilitaires.getMatMultScalaire(rectangle, 173.432f);
-		
-		for(int i = 0; i < matM.length; i++)
-		{
-			for (int j = 0; j < matM[i].length; j++)
-			{
-				assertEquals(matM[i][j], mat[i][j] * 5);
-			}
-		}
-		
-		for(int i = 0; i < grosseMatM.length; i++)
-		{
-			for (int j = 0; j < grosseMatM[i].length; j++)
-			{
-				assertTrue(grosseMatM[i][j] == Math.floor(grosseMat[i][j] * 5.5f));
-			}
-		}
-		
-		for(int i = 0; i < rectangleM.length; i++)
-		{
-			for (int j = 0; j < rectangleM[i].length; j++)
-			{
-				assertTrue(rectangleM[i][j] == Math.floor(rectangle[i][j] * 173.432f));
-			}
-		}
+		int[][] grosseMatM = MatriceUtilitaires.getMatMultScalaire(grosseMat,
+				-5.5f);
+		int[][] rectangleM = MatriceUtilitaires.getMatMultScalaire(rectangle,
+				173.432f);
+
+		// Tests
+		boucleTestMultScalaire(mat, matM, 5);
+		boucleTestMultScalaire(grosseMat, grosseMatM, -5.5f);
+		boucleTestMultScalaire(rectangle, rectangleM, 173.432f);
 	}
 
 	@Test
 	public void testGetMatModuloX()
 	{
-		fail("Not yet implemented");
+		// Matrices avec le modulo appliqué
+		int[][] matMod27 = MatriceUtilitaires.getMatModuloX(mat, 27);
+		int[][] matModMoins11 = MatriceUtilitaires.getMatModuloX(mat, -11);
+		int[][] rectangleMod2 = MatriceUtilitaires.getMatModuloX(rectangle, 2);
+
+		// Tests
+		boucleTestModulo(mat, matMod27, 27);
+		boucleTestModulo(mat, matModMoins11, -11);
+		boucleTestModulo(rectangle, rectangleMod2, 2);
+	}
+
+	/**
+	 * Boucle permettant de tester la méthode getMatModuloX de
+	 * MatriceUtilitaires
+	 * 
+	 * @param mat la matrice d'origine
+	 * @param matMod la matrice avec le modulo appliqué
+	 * @param mod le modulo à appliquer
+	 */
+	private void boucleTestModulo(int[][] mat, int[][] matMod, int mod)
+	{
+		for (int i = 0; i < mat.length; i++)
+		{
+			for (int j = 0; j < mat[i].length; j++)
+			{
+				assertEquals(matMod[i][j],
+						MathUtilitaires.modulo(mat[i][j], mod));
+			}
+		}
+	}
+
+	/**
+	 * Boucle permettant de tester la méthode getMatTranspose de
+	 * MatriceUtilitaires
+	 * 
+	 * @param mat1 première matrice transposée
+	 * @param mat2 deuxième matrice transposée
+	 */
+	private void boucleTestTranspose(int[][] mat1, int[][] mat2)
+	{
+		for (int i = 0; i < mat1.length; i++)
+		{
+			for (int j = 0; j < mat1[i].length; j++)
+			{
+				assertEquals(mat1[i][j], mat2[i][j]);
+			}
+		}
+	}
+
+	/**
+	 * Boucle permettant de tester la méthode getMatMultScalaire de la classe
+	 * MatriceUtilitaires
+	 * 
+	 * @param mat la matrice d'origine
+	 * @param matM la matrice multipliée par un scalaire
+	 * @param scalaire le nombre avec lequel multiplier la matrice
+	 */
+	private void boucleTestMultScalaire(int[][] mat, int[][] matM,
+			float scalaire)
+	{
+		for (int i = 0; i < mat.length; i++)
+		{
+			for (int j = 0; j < mat[i].length; j++)
+			{
+				assertTrue(matM[i][j] == Math.floor(mat[i][j] * scalaire));
+			}
+		}
 	}
 
 }
