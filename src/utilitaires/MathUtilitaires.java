@@ -53,16 +53,7 @@ public class MathUtilitaires
 	// TODO modulo - Compléter le code de la méthode
 	public static int modulo(int pVal, int pMod) throws ArithmeticException
 	{
-		int rep = 0;
-
-		if (pMod != 0)
-		{
-			rep = pVal - pMod * Math.floorDiv(pVal, pMod);
-		}
-		else
-			throw new ArithmeticException("Division par zéro");
-
-		return rep;
+		return pVal - pMod * Math.floorDiv(pVal, pMod);
 	}
 
 	/**
@@ -107,7 +98,7 @@ public class MathUtilitaires
 	// TODO estPremier - Compléter le code de la méthode
 	public static boolean estPremier(int pVal)
 	{
-		return diviseursDe(pVal).size() == 2;
+		return pVal > 1 && diviseursDe(pVal).size() == 2;
 	}
 
 	/**
@@ -149,9 +140,7 @@ public class MathUtilitaires
 	// TODO PGCD - Compléter le code de la méthode
 	public static int PGCD(int pVal1, int pVal2)
 	{
-		int mod = 0;
-
-		mod = modulo(pVal1, pVal2);
+		int mod = modulo(pVal1, pVal2);
 
 		return mod == 0 ? pVal2 : PGCD(pVal2, mod);
 
@@ -241,7 +230,7 @@ public class MathUtilitaires
 				/ MathUtilitaires.fact(nbrElement - nbrElementPris))
 				/ MathUtilitaires.fact(nbrElementPris));
 	}
-	
+
 	public static void main(String[] args)
 	{
 		System.out.println(modulo(265, 16));

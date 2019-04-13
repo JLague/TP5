@@ -18,6 +18,8 @@ public class MathUtilitairesTest
 	private static final int[] NBR_PREMIERS =
 	{ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67,
 			71, 73, 79, 83, 89, 97 };
+	private static final int[] PREMIERS_ENTRE_1_ET_26 =
+	{ 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25 };
 
 	@Test
 	public void testFact()
@@ -57,14 +59,14 @@ public class MathUtilitairesTest
 		SortedSet<Integer> diviseursMoins12 = MathUtilitaires.diviseursDe(-12);
 		SortedSet<Integer> diviseurs17 = MathUtilitaires.diviseursDe(17);
 
-		for (int i = 0; i < DIVISEURS_DE_12.length; i++)
+		for (int nb : DIVISEURS_DE_12)
 		{
-			assertTrue(diviseurs12.contains(DIVISEURS_DE_12[i]));
+			assertTrue(diviseurs12.contains(nb));
 		}
 
-		for (int i = 0; i < DIVISEURS_DE_17.length; i++)
+		for (int nb : DIVISEURS_DE_17)
 		{
-			assertTrue(diviseurs17.contains(DIVISEURS_DE_17[i]));
+			assertTrue(diviseurs17.contains(nb));
 		}
 
 		assertEquals(MathUtilitaires.diviseursDe(0), null);
@@ -74,45 +76,79 @@ public class MathUtilitairesTest
 	@Test
 	public void testEstPremier()
 	{
-		int index = 0;
+		assertTrue(MathUtilitaires.estPremier(2));
+		assertTrue(MathUtilitaires.estPremier(3));
+		assertTrue(MathUtilitaires.estPremier(11));
+		assertTrue(MathUtilitaires.estPremier(179426549));
 
-		for (int i = 1; i <= 100; i++)
-		{
-			if (index < NBR_PREMIERS.length && i == NBR_PREMIERS[index])
-			{
-				assertTrue(MathUtilitaires.estPremier(i));
-				index++;
-			}
-			else
-				assertFalse(MathUtilitaires.estPremier(i));
-		}
+		assertFalse(MathUtilitaires.estPremier(1));
+		assertFalse(MathUtilitaires.estPremier(-11));
 	}
 
 	@Test
 	public void testXPremier()
 	{
-		fail("Not yet implemented");
+		SortedSet<Integer> premiers = MathUtilitaires.xPremier(100);
+		SortedSet<Integer> vide = MathUtilitaires.xPremier(1);
+		SortedSet<Integer> vide2 = MathUtilitaires.xPremier(-10);
+
+		for (int nb : NBR_PREMIERS)
+		{
+			assertTrue(premiers.contains(nb));
+		}
+
+		assertTrue(premiers.size() == NBR_PREMIERS.length);
+
+		assertEquals(vide, null);
+		assertEquals(vide2, null);
 	}
 
 	@Test
 	public void testPGCD()
 	{
-		fail("Not yet implemented");
+		assertEquals(MathUtilitaires.PGCD(30, 45), 15);
+		assertEquals(MathUtilitaires.PGCD(45, 30), 15);
+		assertEquals(MathUtilitaires.PGCD(100, 10), 10);
+		assertEquals(MathUtilitaires.PGCD(221, 782), 17);
+		assertEquals(MathUtilitaires.PGCD(-221, 782), 17);
+		assertEquals(MathUtilitaires.PGCD(221, -782), -17);
 	}
 
 	@Test
 	public void testXPremierEntreEux()
 	{
-		fail("Not yet implemented");
+		SortedSet<Integer> premiers26 = MathUtilitaires.xPremierEntreEux(1, 26);
+		SortedSet<Integer> premiersMoins1Et26 = MathUtilitaires.xPremierEntreEux(-1, 26);
+
+		for (int nb : PREMIERS_ENTRE_1_ET_26)
+		{
+			assertTrue(premiers26.contains(nb));
+		}
+
+		assertTrue(premiers26.size() == PREMIERS_ENTRE_1_ET_26.length);
+		assertEquals(premiers26, premiersMoins1Et26);
+		
+		assertEquals(MathUtilitaires.xPremierEntreEux(1, 1), null);
 	}
 
 	@Test
 	public void testAlea()
 	{
+//		int borne1 = 0;
+//		int borne2 = 0;
+
 		boucleAleatoire(0, 1);
 		boucleAleatoire(1, 0);
 		boucleAleatoire(-100, 100);
 		boucleAleatoire(100, -100);
+
+		/*
+		 * //Un peu overkill for(int i = 0; i < NBR_TESTS; i++) { borne1 =
+		 * MathUtilitaires.alea(-1000, 1000); borne2 =
+		 * MathUtilitaires.alea(-1000, 1000);
+		 * 
+		 * boucleAleatoire(borne1, borne2); }
+		 */
 	}
 
 	/**
