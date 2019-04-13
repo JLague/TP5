@@ -3,7 +3,6 @@ package structures;
 import java.util.List;
 import java.util.ArrayList;
 import exceptions.ConstructeurException;
-import utilitaires.MathUtilitaires;
 
 /**
  * Classe qui permet de produire une liste de listes de combinaison d'entiers
@@ -19,7 +18,7 @@ import utilitaires.MathUtilitaires;
 public class ListeCombinatoire
 {
 	public static final int VALEUR_ENS_MIN = 0;
-	public static final int VALEUR_ENS_MAX = 100;
+	public static final int VALEUR_ENS_MAX = 50;
 	public static final int LONGUEUR_COMBINAISON_MIN = 1;
 
 	private int debutEns = 0;
@@ -43,24 +42,28 @@ public class ListeCombinatoire
 	public ListeCombinatoire(int pValDebut, int pValFin, int pLongCombinaison)
 			throws ConstructeurException
 	{
-		// int nbrCombinaisons = 0;
 		List<Integer> listeVide = new ArrayList<Integer>();
 
 		if (validerLimitesEns(pValDebut, pValFin) && validerLongCombinaison(
-				pLongCombinaison, pValFin - pValDebut))
+				pLongCombinaison, (pValFin - pValDebut) + 1))
 		{
+			// Assigne les attributs
 			setLimitesEns(pValDebut, pValFin);
 			setLongCombinaison(pLongCombinaison);
 
+			// Génère l'ensemble de valeurs
 			setEnsembleValeurs(genererEnsembleValeurs());
 
+			// Instancie la liste de combinaisons
 			setListeDeCombinaisons(new ArrayList<List<Integer>>());
 
+			// Génère une liste vide pour passer à produireListeCombinaisons
 			for (int i = 0; i < this.longCombinaison; i++)
 			{
 				listeVide.add(0);
 			}
 
+			// Génère la liste de combinaisons
 			produireListeCombinaisons(this.ensembleValeurs,
 					this.longCombinaison, listeVide);
 		}
@@ -199,7 +202,7 @@ public class ListeCombinatoire
 						this.longCombinaison - pLongueurRestante,
 						pEnsembleValeurs.get(i));
 
-				// Remplit le reste de la combinaison
+				// Remplit le reste de la combinaison avec l'ensemble restant
 				produireListeCombinaisons(
 						pEnsembleValeurs.subList(i + 1,
 								pEnsembleValeurs.size()),
@@ -242,15 +245,13 @@ public class ListeCombinatoire
 				+ "]\nLongueur combinaison : " + this.longCombinaison
 				+ "\nEnsemble : " + getEnsembleValeurs() + "\nVoici les "
 				+ getTailleListeDeCombinaisons() + " combinaisons : "
-				+ getListeDeCombinaisons();
+				+ getListeDeCombinaisons() + "\n";
 	}
 
 	public static void main(String[] args)
 	{
 		ListeCombinatoire liste = new ListeCombinatoire(1, 5, 3);
-		ListeCombinatoire liste2 = new ListeCombinatoire(1, 20, 5);
 
 		System.out.println(liste);
-		System.out.println(liste2);
 	}
 }
