@@ -10,7 +10,7 @@ import utilitaires.MatriceUtilitaires;
 
 public class MatriceUtilitairesTest
 {
-	int[][] mat, grosseMat, rectangle;
+	private static int[][] mat, grosseMat, rectangle;
 
 	@Before
 	public void MatriceUtilitaires()
