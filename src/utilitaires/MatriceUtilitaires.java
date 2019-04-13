@@ -2,8 +2,6 @@ package utilitaires;
 
 import java.util.Iterator;
 import java.util.SortedSet;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Classe utilitaires pour la gestion des matrices carrées
