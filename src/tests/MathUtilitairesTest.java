@@ -112,6 +112,7 @@ public class MathUtilitairesTest
 		assertEquals(MathUtilitaires.PGCD(221, 782), 17);
 		assertEquals(MathUtilitaires.PGCD(-221, 782), 17);
 		assertEquals(MathUtilitaires.PGCD(221, -782), -17);
+		assertEquals(MathUtilitaires.PGCD(100, 0), 0);
 	}
 
 	@Test

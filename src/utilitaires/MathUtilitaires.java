@@ -114,7 +114,7 @@ public class MathUtilitaires
 	{
 		SortedSet<Integer> premiers = new TreeSet<Integer>();
 
-		for (int i = 1; i < pVal; i++)
+		for (int i = 1; i <= pVal; i++)
 		{
 			if (estPremier(i))
 			{
@@ -140,9 +140,16 @@ public class MathUtilitaires
 	// TODO PGCD - Compléter le code de la méthode
 	public static int PGCD(int pVal1, int pVal2)
 	{
-		int mod = modulo(pVal1, pVal2);
+		int rep = 0;
+		int mod = 0;
+		
+		if(pVal1 != 0 && pVal2 != 0)
+		{
+			mod = modulo(pVal1, pVal2);
+			rep = mod == 0 ? pVal2 : PGCD(pVal2, mod);
+		}
 
-		return mod == 0 ? pVal2 : PGCD(pVal2, mod);
+		return rep;
 
 	}
 

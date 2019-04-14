@@ -245,7 +245,7 @@ public class ListeCombinatoire
 				+ "]\nLongueur combinaison : " + this.longCombinaison
 				+ "\nEnsemble : " + getEnsembleValeurs() + "\nVoici les "
 				+ getTailleListeDeCombinaisons() + " combinaisons : "
-				+ getListeDeCombinaisons() + "\n";
+				+ getListeDeCombinaisons();
 	}
 
 	public static void main(String[] args)
