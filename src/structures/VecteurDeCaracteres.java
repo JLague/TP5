@@ -50,7 +50,7 @@ public class VecteurDeCaracteres
 	{
 		this.tableCaracteres = new ArrayList<Character>();
 
-		if (tabChar.length > 0)
+		if (validerTabChar(tabChar))
 		{
 			for (char c : tabChar)
 			{
@@ -73,7 +73,18 @@ public class VecteurDeCaracteres
 	// TODO getCaractere - Compléter le code de la méthode
 	public char getCaractere(int index) throws ArrayIndexOutOfBoundsException
 	{
-		return this.tableCaracteres.get(index);
+		char c = ' ';
+		
+		try
+		{
+			c = this.tableCaracteres.get(index);
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			throw new ArrayIndexOutOfBoundsException();
+		}
+		
+		return c;
 	}
 
 	/**
@@ -86,18 +97,6 @@ public class VecteurDeCaracteres
 	// TODO getIndice - Compléter le code de la méthode
 	public int getIndice(char car)
 	{
-		// int indice = -1;
-		//
-		// for(int i = 0; i < this.getTaille(); i++)
-		// {
-		// if(this.tableCaracteres.get(i) == car)
-		// {
-		// indice = i;
-		// }
-		// }
-		//
-		// return indice;
-
 		return this.tableCaracteres.indexOf(car);
 	}
 
@@ -110,6 +109,18 @@ public class VecteurDeCaracteres
 	public int getTaille()
 	{
 		return this.tableCaracteres.size();
+	}
+	
+	/**
+	 * Valide le tableau de caractères passé en paramètre
+	 * 
+	 * @param tabChar le tableau de caractères à valider
+	 * 
+	 * @return vrai si le tableau est valide
+	 */
+	private boolean validerTabChar(char[] tabChar)
+	{
+		return tabChar != null && tabChar.length >= 1;
 	}
 
 	/**
