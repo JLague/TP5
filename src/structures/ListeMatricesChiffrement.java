@@ -2,6 +2,8 @@ package structures;
 
 import java.util.*;
 
+import exceptions.ConstructeurException;
+
 /**
  * Classe qui permet de faire la gestion des matrices candidates pour le chiffre
  * de Hill. Les matrices sont produites à partir des combinaisons sans ordre et
@@ -64,6 +66,24 @@ public class ListeMatricesChiffrement implements iMatrice
 	public ListeMatricesChiffrement(int pBorneInf, int pBorneSup,
 			int pDimension, int pCoefDansZ) throws ConstructeurException
 	{
+		ListeCombinatoire liste = null;
+
+		if (validerBornes(pBorneInf, pBorneSup) && validerDimension(pDimension)
+				&& validerCoefDansZ(pCoefDansZ))
+		{
+			liste = new ListeCombinatoire(pBorneInf, pBorneSup, pDimension);
+
+			setBornes(pBorneInf, pBorneSup);
+			setDimension(pDimension);
+			setCoefDansZ(pCoefDansZ);
+
+			genererListeMatrices(liste);
+			choisirMatriceCourante();
+		}
+		else
+			throw new ConstructeurException(
+					"Un ou des paramètres sont invalides");
+
 	}
 
 	public int getBorneInf()
@@ -162,20 +182,48 @@ public class ListeMatricesChiffrement implements iMatrice
 	// TODO choisirMatriceCourante - Compléter le code de la méthode
 	public void choisirMatriceCourante()
 	{
+		int longueur = getNombreMatricesCandidates();
+		int nb = 0;
+
+		if (longueur > 0)
+		{
+			nb = (int) Math.random() * (longueur + 1);
+			choisirMatriceCourante(nb);
+		}
+		else
+			setMatriceCourante(null);
 	}
 
-	
 	@Override
 	// TODO choisirMatriceCourante - Compléter le code de la méthode
 	public void choisirMatriceCourante(int index)
 	{
+		if (validerIndex(index))
+			setMatriceCourante(this.listeMatricesCandidates.get(index));
+		else
+			setMatriceCourante(null);
+
+		// setMatriceCourante(validerIndex(index) ?
+		// this.listeMatricesCandidates.get(index) : null);
 	}
 
 	@Override
 	// TODO getCopieMatriceCourante - Compléter le code de la méthode
 	public int[][] getCopieMatriceCourante()
 	{
-		return null;
+		int[][] copie = null;
+
+		if (getMatriceCourante() != null)
+		{
+			copie = new int[this.dimension][];
+
+			for (int i = 0; i < this.dimension; i++)
+			{
+				copie[i] = getMatriceCourante()[i].clone();
+			}
+		}
+
+		return copie;
 	}
 
 	@Override

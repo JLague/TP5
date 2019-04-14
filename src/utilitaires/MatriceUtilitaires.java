@@ -11,21 +11,6 @@ import java.util.SortedSet;
  */
 public class MatriceUtilitaires
 {
-	
-	private static int[][] mat = new int[][]
-			{
-					{ 6, 1, -5 },
-					{ -2, -5, 4 },
-					{ -3, 3, -1 } };
-	
-	private static int[][] grosseMat = new int[][]
-			{
-					{ 1, 2, 3, 4, 5 },
-					{ 6, 7, 8, 9, 10 },
-					{ 11, 12, 13, 14, 15 },
-					{ 16, 17, 18, 19, 20 },
-					{ 21, 22, 23, 24, 25 } };
-
 	/**
 	 * Permet de produire une chaîne de caractères pour l'affichage d'une
 	 * matrice N X M dans la console. Très utile pour faire des tests.
@@ -316,11 +301,5 @@ public class MatriceUtilitaires
 		}
 
 		return copie;
-	}
-	
-	public static void main(String[] args)
-	{
-		System.out.println(MatriceUtilitaires.getDeterminant(grosseMat));
-		System.out.println(MatriceUtilitaires.getDeterminant(mat));
 	}
 }
