@@ -1,8 +1,6 @@
 package utilitaires;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.SortedSet;
 
 /**
@@ -13,6 +11,20 @@ import java.util.SortedSet;
  */
 public class MatriceUtilitaires
 {
+	
+	private static int[][] mat = new int[][]
+			{
+					{ 6, 1, -5 },
+					{ -2, -5, 4 },
+					{ -3, 3, -1 } };
+	
+	private static int[][] grosseMat = new int[][]
+			{
+					{ 1, 2, 3, 4, 5 },
+					{ 6, 7, 8, 9, 10 },
+					{ 11, 12, 13, 14, 15 },
+					{ 16, 17, 18, 19, 20 },
+					{ 21, 22, 23, 24, 25 } };
 
 	/**
 	 * Permet de produire une chaîne de caractères pour l'affichage d'une
@@ -193,7 +205,27 @@ public class MatriceUtilitaires
 	// TODO getDeterminant - MANDAT 2 - Compléter le code de la méthode
 	public static int getDeterminant(int[][] mat)
 	{
-		return 0;
+		int rep = 0;
+
+		if (mat.length == 1)
+		{
+			rep = mat[0][0];
+		}
+		else if (mat.length == 2)
+		{
+			// ad-bc
+			rep = mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0];
+		}
+		else
+		{
+			for (int i = 0; i < mat.length; i++)
+			{
+				rep += Math.pow(-1, i)
+						* mat[i][0] * getDeterminant(getMatMineur(mat, i, 0));
+			}
+		}
+
+		return rep;
 	}
 
 	/**
@@ -207,7 +239,18 @@ public class MatriceUtilitaires
 	// TODO getMatCofacteurs - MANDAT 2 - Compléter le code de la méthode
 	public static int[][] getMatCofacteurs(int[][] mat)
 	{
-		return null;
+		int[][] matC = getMatCopieProfonde(mat);
+
+		for (int i = 0; i < mat.length; i++)
+		{
+			for (int j = 0; j < mat.length; j++)
+			{
+				matC[i][j] = getDeterminant(getMatMineur(mat, i, j));
+				matC[i][j] *= Math.pow(-1, i + j);
+			}
+		}
+
+		return matC;
 	}
 
 	/**
@@ -222,7 +265,7 @@ public class MatriceUtilitaires
 	// TODO getMatAdjointe - MANDAT 2 - Compléter le code de la méthode
 	public static int[][] getMatAdjointe(int[][] mat)
 	{
-		return null;
+		return getMatTranspose(getMatCofacteurs(mat));
 	}
 
 	/**
@@ -273,5 +316,11 @@ public class MatriceUtilitaires
 		}
 
 		return copie;
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(MatriceUtilitaires.getDeterminant(grosseMat));
+		System.out.println(MatriceUtilitaires.getDeterminant(mat));
 	}
 }
