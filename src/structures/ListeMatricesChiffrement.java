@@ -2,6 +2,9 @@ package structures;
 
 import java.util.*;
 
+import utilitaires.MatriceUtilitaires;
+import utilitaires.MathUtilitaires;
+
 import exceptions.ConstructeurException;
 
 /**
@@ -77,6 +80,7 @@ public class ListeMatricesChiffrement implements iMatrice
 			setDimension(pDimension);
 			setCoefDansZ(pCoefDansZ);
 
+			this.listeMatricesCandidates = new ArrayList<int[][]>();
 			genererListeMatrices(liste);
 			choisirMatriceCourante();
 		}
@@ -230,7 +234,13 @@ public class ListeMatricesChiffrement implements iMatrice
 	// TODO getMatriceCouranteInverseHill - Compléter le code de la méthode
 	public int[][] getMatriceCouranteInverseHill()
 	{
-		return null;
+		int[][] matrice = this.getCopieMatriceCourante();
+		int[][] matAdj = MatriceUtilitaires.getMatAdjointe(matrice);
+		int det = MatriceUtilitaires.getDeterminant(matrice);
+		int detHill = MatriceUtilitaires.getDeterminantInverseHill(det, this.coefDansZ);
+		int[][] matProd = MatriceUtilitaires.getMatMultScalaire(matAdj, detHill);
+		
+		return MatriceUtilitaires.getMatModuloX(matProd, this.coefDansZ);
 	}
 
 	/**
@@ -250,5 +260,34 @@ public class ListeMatricesChiffrement implements iMatrice
 	// TODO genererListeMatrices - Compléter le code de la méthode
 	private void genererListeMatrices(ListeCombinatoire pListe)
 	{
+		int taille = pListe.getTailleListeDeCombinaisons();
+		Integer[] temp = null;
+		int[][] matrice = new int[dimension][dimension];;
+		int det = 0;
+		
+		for(int i = 0; i < taille; i++)
+		{	
+			temp = pListe.getCombinaison(i).toArray(new Integer[dimension]);
+			
+			for (int j = 0; j < dimension; j++)
+			{
+				matrice[i % dimension][j] = (int) temp[j];
+			}
+			
+			det = MatriceUtilitaires.getDeterminant(matrice);
+			
+			if(MathUtilitaires.PGCD(det, this.coefDansZ) == 1)
+			{
+				this.listeMatricesCandidates.add(MatriceUtilitaires.getMatCopieProfonde(matrice));
+			}
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20, 6, 28);
+		System.out.println(liste.getNombreMatricesCandidates());
+		liste.choisirMatriceCourante();
+		
 	}
 }

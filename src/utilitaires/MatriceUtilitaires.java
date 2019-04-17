@@ -291,7 +291,7 @@ public class MatriceUtilitaires
 	 * 
 	 * @return une copie de la matrice
 	 */
-	private static int[][] getMatCopieProfonde(int[][] mat)
+	public static int[][] getMatCopieProfonde(int[][] mat)
 	{
 		int[][] copie = new int[mat.length][];
 

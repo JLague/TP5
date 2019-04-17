@@ -23,14 +23,7 @@ public class MathUtilitaires
 	// TODO fact - Compléter le code de la méthode
 	public static double fact(int valFact)
 	{
-		double rep = 1;
-
-		if (valFact >= 1)
-		{
-			rep = valFact == 1 ? 1 : valFact * fact(valFact - 1);
-		}
-
-		return rep;
+		return valFact > 1 ? valFact * fact(valFact - 1) : 1;
 	}
 
 	/**
@@ -241,5 +234,6 @@ public class MathUtilitaires
 	public static void main(String[] args)
 	{
 		System.out.println(modulo(265, 16));
+		System.out.println(xPremierEntreEux(0, 28));
 	}
 }
