@@ -74,13 +74,13 @@ public class ListeMatricesChiffrement implements iMatrice
 		if (validerBornes(pBorneInf, pBorneSup) && validerDimension(pDimension)
 				&& validerCoefDansZ(pCoefDansZ))
 		{
-			liste = new ListeCombinatoire(pBorneInf, pBorneSup, pDimension);
-
 			setBornes(pBorneInf, pBorneSup);
 			setDimension(pDimension);
 			setCoefDansZ(pCoefDansZ);
 
 			this.listeMatricesCandidates = new ArrayList<int[][]>();
+			liste = new ListeCombinatoire(pBorneInf, pBorneSup,
+					pDimension * pDimension);
 			genererListeMatrices(liste);
 			choisirMatriceCourante();
 		}
@@ -191,7 +191,7 @@ public class ListeMatricesChiffrement implements iMatrice
 
 		if (longueur > 0)
 		{
-			nb = (int) Math.random() * (longueur + 1);
+			nb = (int) (Math.random() * (longueur + 1));
 			choisirMatriceCourante(nb);
 		}
 		else
@@ -237,9 +237,11 @@ public class ListeMatricesChiffrement implements iMatrice
 		int[][] matrice = this.getCopieMatriceCourante();
 		int[][] matAdj = MatriceUtilitaires.getMatAdjointe(matrice);
 		int det = MatriceUtilitaires.getDeterminant(matrice);
-		int detHill = MatriceUtilitaires.getDeterminantInverseHill(det, this.coefDansZ);
-		int[][] matProd = MatriceUtilitaires.getMatMultScalaire(matAdj, detHill);
-		
+		int detHill = MatriceUtilitaires.getDeterminantInverseHill(det,
+				this.coefDansZ);
+		int[][] matProd = MatriceUtilitaires.getMatMultScalaire(matAdj,
+				detHill);
+
 		return MatriceUtilitaires.getMatModuloX(matProd, this.coefDansZ);
 	}
 
@@ -261,33 +263,48 @@ public class ListeMatricesChiffrement implements iMatrice
 	private void genererListeMatrices(ListeCombinatoire pListe)
 	{
 		int taille = pListe.getTailleListeDeCombinaisons();
+		int[][] matrice = new int[dimension][dimension];
 		Integer[] temp = null;
-		int[][] matrice = new int[dimension][dimension];;
-		int det = 0;
-		
-		for(int i = 0; i < taille; i++)
-		{	
-			temp = pListe.getCombinaison(i).toArray(new Integer[dimension]);
-			
+		int cpt = 0;
+
+		// Parcours la liste de combinaison
+		for (int i = 0; i < taille; i++)
+		{
+			cpt = 0;
+			temp = pListe.getCombinaison(i)
+					.toArray(new Integer[dimension * dimension]);
+
+			// Remplie la matrice avec la combinaison
 			for (int j = 0; j < dimension; j++)
 			{
-				matrice[i % dimension][j] = (int) temp[j];
+				for (int k = 0; k < dimension; k++)
+				{
+					matrice[j][k] = (int) temp[cpt++];
+				}
 			}
-			
-			det = MatriceUtilitaires.getDeterminant(matrice);
-			
-			if(MathUtilitaires.PGCD(det, this.coefDansZ) == 1)
+
+			// Si la matrice est candidate, l'ajouter à la liste
+			if (MathUtilitaires.PGCD(MatriceUtilitaires.getDeterminant(matrice),
+					this.coefDansZ) == 1)
 			{
-				this.listeMatricesCandidates.add(MatriceUtilitaires.getMatCopieProfonde(matrice));
+				this.listeMatricesCandidates
+						.add(MatriceUtilitaires.getMatCopieProfonde(matrice));
 			}
 		}
 	}
-	
+
 	public static void main(String[] args)
 	{
-		ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20, 6, 28);
+		ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20, 3,
+				28);
 		System.out.println(liste.getNombreMatricesCandidates());
-		liste.choisirMatriceCourante();
-		
+		System.out.println(
+				MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
+		liste.choisirMatriceCourante(0);
+		System.out.println(
+				MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
+		System.out.println(MatriceUtilitaires
+				.toStringMat(liste.getMatriceCouranteInverseHill()));
+
 	}
 }

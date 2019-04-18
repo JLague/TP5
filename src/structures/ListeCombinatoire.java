@@ -111,13 +111,15 @@ public class ListeCombinatoire
 	{
 		// Au besoin, inversion des valeurs pour simplement éviter les
 		// erreurs...
-		boolean ok = validerLimitesEns(pDebutEns = Math.min(pDebutEns, pFinEns),
-				pFinEns = Math.max(pDebutEns, pFinEns));
+
+		int min = Math.min(pDebutEns, pFinEns);
+		int max = Math.max(pDebutEns, pFinEns);
+		boolean ok = validerLimitesEns(min, max);
 
 		if (ok)
 		{
-			this.debutEns = pDebutEns;
-			this.finEns = pFinEns;
+			this.debutEns = min;
+			this.finEns = max;
 		}
 	}
 
