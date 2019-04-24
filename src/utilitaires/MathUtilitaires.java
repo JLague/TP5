@@ -46,7 +46,12 @@ public class MathUtilitaires
 	// TODO modulo - Compléter le code de la méthode
 	public static int modulo(int pVal, int pMod) throws ArithmeticException
 	{
-		return pVal - pMod * Math.floorDiv(pVal, pMod);
+		// return pVal - pMod * Math.floorDiv(pVal, pMod);
+
+		// Solution à Alex
+		// return pVal * pMod > 0 ? pVal % pMod : pVal + (pVal % pMod);
+
+		return (pVal % pMod + pMod) % pMod;
 	}
 
 	/**
@@ -135,8 +140,8 @@ public class MathUtilitaires
 	{
 		int rep = 0;
 		int mod = 0;
-		
-		if(pVal1 != 0 && pVal2 != 0)
+
+		if (pVal1 != 0 && pVal2 != 0)
 		{
 			mod = modulo(pVal1, pVal2);
 			rep = mod == 0 ? pVal2 : PGCD(pVal2, mod);
@@ -198,14 +203,10 @@ public class MathUtilitaires
 	// TODO alea - Compléter le code de la méthode
 	public static int alea(int pMin, int pMax)
 	{
-		int temp = 0;
-
 		if (pMin > pMax)
 		{
-			// Pérmuter les deux valeurs
-			temp = pMin;
-			pMin = pMax;
-			pMax = temp;
+			// Pérmuter les deux valeurs avec XOR
+			pMin = pMin ^ pMax ^ (pMax = pMin);
 		}
 
 		return (int) (Math.random() * (pMax - pMin + 1)) + pMin;
@@ -235,5 +236,8 @@ public class MathUtilitaires
 	{
 		System.out.println(modulo(265, 16));
 		System.out.println(xPremierEntreEux(0, 28));
+		System.out.println((-1 % 19 + 19));
+		System.out.println(modulo(-1, 19));
+		System.out.println(modulo(16, -3));
 	}
 }
