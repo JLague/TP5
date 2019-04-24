@@ -2,6 +2,9 @@ package structures;
 
 import java.util.List;
 import java.util.ArrayList;
+//import java.util.Arrays;
+import java.util.LinkedList;
+
 import exceptions.ConstructeurException;
 
 /**
@@ -42,7 +45,7 @@ public class ListeCombinatoire
 	public ListeCombinatoire(int pValDebut, int pValFin, int pLongCombinaison)
 			throws ConstructeurException
 	{
-		List<Integer> listeVide = new ArrayList<Integer>();
+		List<Integer> listeVide = new LinkedList<Integer>();
 
 		if (validerLimitesEns(pValDebut, pValFin) && validerLongCombinaison(
 				pLongCombinaison, (pValFin - pValDebut) + 1))
@@ -55,7 +58,7 @@ public class ListeCombinatoire
 			setEnsembleValeurs(genererEnsembleValeurs());
 
 			// Instancie la liste de combinaisons
-			setListeDeCombinaisons(new ArrayList<List<Integer>>());
+			setListeDeCombinaisons(new LinkedList<List<Integer>>());
 
 			// Génère une liste vide pour passer à produireListeCombinaisons
 			for (int i = 0; i < this.longCombinaison; i++)

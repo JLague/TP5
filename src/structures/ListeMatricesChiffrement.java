@@ -69,8 +69,6 @@ public class ListeMatricesChiffrement implements iMatrice
 	public ListeMatricesChiffrement(int pBorneInf, int pBorneSup,
 			int pDimension, int pCoefDansZ) throws ConstructeurException
 	{
-		ListeCombinatoire liste = null;
-
 		if (validerBornes(pBorneInf, pBorneSup) && validerDimension(pDimension)
 				&& validerCoefDansZ(pCoefDansZ))
 		{
@@ -78,10 +76,9 @@ public class ListeMatricesChiffrement implements iMatrice
 			setDimension(pDimension);
 			setCoefDansZ(pCoefDansZ);
 
-			this.listeMatricesCandidates = new ArrayList<int[][]>();
-			liste = new ListeCombinatoire(pBorneInf, pBorneSup,
-					pDimension * pDimension);
-			genererListeMatrices(liste);
+			this.listeMatricesCandidates = new LinkedList<int[][]>();
+			genererListeMatrices(new ListeCombinatoire(pBorneInf, pBorneSup,
+					pDimension * pDimension));
 			choisirMatriceCourante();
 		}
 		else
