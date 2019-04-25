@@ -238,6 +238,6 @@ public class MathUtilitaires
 		System.out.println(xPremierEntreEux(0, 28));
 		System.out.println((-1 % 19 + 19));
 		System.out.println(modulo(-1, 19));
-		System.out.println(modulo(16, -3));
+		System.out.println(modulo(-27, 27));
 	}
 }

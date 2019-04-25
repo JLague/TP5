@@ -27,7 +27,7 @@ public interface iCrypto
 	 *
 	 * @return le message ajusté
 	 */
-	public String ajusterMessageBrute(String message, int longVoulue);
+	public String ajusterMessageBrute(String message, int diviseur);
 
 	/**
 	 * Permet de chiffrer le message reçu en entrée. Cette méthode choisit une

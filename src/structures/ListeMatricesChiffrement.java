@@ -183,16 +183,8 @@ public class ListeMatricesChiffrement implements iMatrice
 	// TODO choisirMatriceCourante - Compléter le code de la méthode
 	public void choisirMatriceCourante()
 	{
-		int longueur = getNombreMatricesCandidates();
-		int nb = 0;
-
-		if (longueur > 0)
-		{
-			nb = (int) (Math.random() * (longueur + 1));
-			choisirMatriceCourante(nb);
-		}
-		else
-			setMatriceCourante(null);
+		choisirMatriceCourante(
+				MathUtilitaires.alea(0, listeMatricesCandidates.size() - 1));
 	}
 
 	@Override
@@ -259,25 +251,19 @@ public class ListeMatricesChiffrement implements iMatrice
 	// TODO genererListeMatrices - Compléter le code de la méthode
 	private void genererListeMatrices(ListeCombinatoire pListe)
 	{
-		int taille = pListe.getTailleListeDeCombinaisons();
 		int[][] matrice = new int[dimension][dimension];
 		Integer[] temp = null;
-		int cpt = 0;
 
 		// Parcours la liste de combinaison
-		for (int i = 0; i < taille; i++)
+		for (int i = 0; i < pListe.getTailleListeDeCombinaisons(); i++)
 		{
-			cpt = 0;
 			temp = pListe.getCombinaison(i)
 					.toArray(new Integer[dimension * dimension]);
 
 			// Remplie la matrice avec la combinaison
-			for (int j = 0; j < dimension; j++)
+			for (int j = 0; j < dimension * dimension; j++)
 			{
-				for (int k = 0; k < dimension; k++)
-				{
-					matrice[j][k] = (int) temp[cpt++];
-				}
+					matrice[j / dimension][j % dimension] = (int) temp[j];
 			}
 
 			// Si la matrice est candidate, l'ajouter à la liste

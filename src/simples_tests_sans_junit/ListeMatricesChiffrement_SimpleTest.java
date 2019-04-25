@@ -6,9 +6,9 @@ import utilitaires.MatriceUtilitaires;
 
 public class ListeMatricesChiffrement_SimpleTest
 {
-	private static final int MIN = 1;
-	private static final int MAX = 7;
-	private static final int DIM_MATRICE = 2;
+	private static final int MIN = 4;
+	private static final int MAX = 14;
+	private static final int DIM_MATRICE = 3;
 	private static final int COEFFICIENT_DANS_Z = 28;
 
 	public static void main(String[] args)
@@ -24,6 +24,7 @@ public class ListeMatricesChiffrement_SimpleTest
 		System.out.println("getDimension : " + mc.getDimension());
 		System.out.println(
 				"getNombreMatrices : " + mc.getNombreMatricesCandidates());
+		mc.choisirMatriceCourante(6);
 		System.out.println("getMatriceCourante : \n"
 				+ MatriceUtilitaires.toStringMat(mc.getCopieMatriceCourante()));
 		System.out.println(
