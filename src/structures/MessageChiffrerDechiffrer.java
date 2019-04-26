@@ -1,9 +1,11 @@
 package structures;
 
+import java.io.File;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
 
 import exceptions.ConstructeurException;
+import utilitaires.FichierUtilitaires;
 import utilitaires.MathUtilitaires;
 import utilitaires.MatriceUtilitaires;
 
@@ -35,6 +37,17 @@ public class MessageChiffrerDechiffrer implements iCrypto
 			ListeMatricesChiffrement listeMats, SortedSet<String> dico)
 			throws ConstructeurException
 	{
+		if (validerVecCaracteres(vecCars) && validerMatsEncodage(listeMats)
+				&& validerDico(dico))
+		{
+			setVecCaracteres(vecCars);
+			setMatsEncodage(listeMats);
+			setDico(dico);
+		}
+		else
+			throw new ConstructeurException(
+					"Un ou des paramètres sont invalides");
+
 	}
 
 	private void setVecCaracteres(VecteurDeCaracteres pVec)
@@ -95,21 +108,57 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public boolean validerMessageSelonDico(String message,
 			float pourcentageDeReussite)
 	{
-		return true;
+		String[] mots = message.toLowerCase().split(" ");
+		int count = 0;
+
+		for (String mot : mots)
+		{
+			// On compte aussi les espaces dans le pourcentage à la fin
+			count += this.dico.contains(mot) ? mot.length() + 1 : 0;
+		}
+
+		return (double) count / message.length() >= pourcentageDeReussite;
 	}
 
 	@Override
 	// TODO ajusterMessageBrute - Compléter le code de la méthode
-	public String ajusterMessageBrute(String message, int longVoulue)
+	public String ajusterMessageBrute(String message, int diviseur)
 	{
-		return "";
+		int nbrEspaces = diviseur
+				- MathUtilitaires.modulo(message.length(), diviseur);
+		System.out.println(nbrEspaces);
+
+		for (int i = 0; i < nbrEspaces; i++)
+		{
+			message += " ";
+		}
+
+		return message;
 	}
 
 	@Override
 	// TODO encoder - Compléter le code de la méthode
 	public String encoder(String message)
 	{
-		return "";
+		int dimension = this.listeMatricesCandidates.getDimension();
+		int[][] matrice = this.getMatriceCourante();
+		message = ajusterMessageBrute(message, dimension);
+		int valeurLettre = 0;
+		int cpt = 0;
+		char lettre = ' ';
+		String messageFinal = "";
+
+		for (int i = 0; i < message.length() / dimension; i++)
+		{
+			cpt = i * dimension;
+			for (int j = 0; j < dimension * dimension; j++)
+			{
+				valeurLettre += matrice[j / dimension][j % dimension]
+						* vecCaracteres.getIndice(message.charAt(cpt++));
+				if()
+			}
+			
+		}
 	}
 
 	@Override
@@ -117,5 +166,18 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public String decoder(String message)
 	{
 		return "";
+	}
+
+	public static void main(String[] args)
+	{
+		MessageChiffrerDechiffrer m = new MessageChiffrerDechiffrer(
+				new VecteurDeCaracteres(),
+				new ListeMatricesChiffrement(1, 20, 2, 28), FichierUtilitaires
+						.lireDictionnaire(new File("dictionnaire.txt")));
+		System.out.println(m.validerMessageSelonDico("ff8 ceci test", 0.8f));
+
+		String message = "test1";
+		System.out.println(m.ajusterMessageBrute(message, 8));
+		System.out.println(message);
 	}
 }

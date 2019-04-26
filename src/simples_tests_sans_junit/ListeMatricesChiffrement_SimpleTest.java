@@ -24,6 +24,7 @@ public class ListeMatricesChiffrement_SimpleTest
 		System.out.println("getDimension : " + mc.getDimension());
 		System.out.println(
 				"getNombreMatrices : " + mc.getNombreMatricesCandidates());
+		mc.choisirMatriceCourante(6);
 		System.out.println("getMatriceCourante : \n"
 				+ MatriceUtilitaires.toStringMat(mc.getCopieMatriceCourante()));
 		System.out.println(
