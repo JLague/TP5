@@ -124,11 +124,7 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	// TODO ajusterMessageBrute - Compléter le code de la méthode
 	public String ajusterMessageBrute(String message, int diviseur)
 	{
-		int nbrEspaces = diviseur
-				- MathUtilitaires.modulo(message.length(), diviseur);
-		System.out.println(nbrEspaces);
-
-		for (int i = 0; i < nbrEspaces; i++)
+		while (MathUtilitaires.modulo(message.length(), diviseur) != 0)
 		{
 			message += " ";
 		}
@@ -140,32 +136,62 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	// TODO encoder - Compléter le code de la méthode
 	public String encoder(String message)
 	{
-		int dimension = this.listeMatricesCandidates.getDimension();
 		int[][] matrice = this.getMatriceCourante();
-		message = ajusterMessageBrute(message, dimension);
-		int valeurLettre = 0;
-		int cpt = 0;
-		char lettre = ' ';
-		String messageFinal = "";
+		message = ajusterMessageBrute(message, matrice.length);
 
-		for (int i = 0; i < message.length() / dimension; i++)
-		{
-			cpt = i * dimension;
-			for (int j = 0; j < dimension * dimension; j++)
-			{
-				valeurLettre += matrice[j / dimension][j % dimension]
-						* vecCaracteres.getIndice(message.charAt(cpt++));
-				if()
-			}
-			
-		}
+		return chiffrageDeHill(matrice, message);
 	}
 
 	@Override
 	// TODO decoder - Compléter le code de la méthode
 	public String decoder(String message)
 	{
-		return "";
+		int[][] matriceInverse = null;
+		String decode = "";
+		boolean trouve = false;
+
+		for (int i = 0; i < listeMatricesCandidates
+				.getNombreMatricesCandidates() && !trouve; i++)
+		{
+			listeMatricesCandidates.choisirMatriceCourante(i);
+			matriceInverse = listeMatricesCandidates
+					.getMatriceCouranteInverseHill();
+
+			decode = chiffrageDeHill(matriceInverse, message);
+			trouve = validerMessageSelonDico(decode, POURCENTAGE_ACCEPTABLE);
+		}
+		
+		return trouve ? decode : null;
+	}
+
+	private String chiffrageDeHill(int[][] matrice, String message)
+	{
+		int valeurLettre = 0;
+		int longueur = message.length();
+		String messageFinal = "";
+		int dimension = matrice.length;
+
+		// Parcours chaque groupe de lettre
+		for (int i = 0; i < longueur / dimension; i++)
+		{
+			// Parcours chaque ligne de la matrice d'encryption
+			for (int j = 0; j < dimension; j++)
+			{
+				// Parcours chaque colonne de la matrice d'encryption
+				for (int k = 0; k < dimension; k++)
+				{
+					valeurLettre += matrice[j][k]
+							* vecCaracteres.getIndice(message.charAt(k));
+				}
+				// Ajoute le caractère au message final
+				messageFinal += vecCaracteres.getCaractere(valeurLettre % 28);
+				valeurLettre = 0;
+			}
+			message = message.substring(dimension);
+
+		}
+
+		return messageFinal;
 	}
 
 	public static void main(String[] args)
@@ -174,10 +200,10 @@ public class MessageChiffrerDechiffrer implements iCrypto
 				new VecteurDeCaracteres(),
 				new ListeMatricesChiffrement(1, 20, 2, 28), FichierUtilitaires
 						.lireDictionnaire(new File("dictionnaire.txt")));
-		System.out.println(m.validerMessageSelonDico("ff8 ceci test", 0.8f));
 
-		String message = "test1";
-		System.out.println(m.ajusterMessageBrute(message, 8));
-		System.out.println(message);
+		String message = "ceci est un test";
+		String e = m.encoder(message);
+		System.out.println(e);
+		System.out.println(m.decoder(e));
 	}
 }

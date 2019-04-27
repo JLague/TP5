@@ -97,7 +97,7 @@ public class VecteurDeCaracteres
 	// TODO getIndice - Compléter le code de la méthode
 	public int getIndice(char car)
 	{
-		return this.tableCaracteres.indexOf(car);
+		return this.tableCaracteres.indexOf(Character.toUpperCase(car));
 	}
 
 	/**
@@ -137,5 +137,12 @@ public class VecteurDeCaracteres
 	public String toString()
 	{
 		return "Table de correspondance = " + this.tableCaracteres;
+	}
+	
+	public static void main(String[] args)
+	{
+		VecteurDeCaracteres vec = new VecteurDeCaracteres();
+		System.out.println(vec.getTaille());
+		System.out.println(vec.getCaractere(2455 % 27));
 	}
 }
