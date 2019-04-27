@@ -137,9 +137,9 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public String encoder(String message)
 	{
 		int[][] matrice = this.getMatriceCourante();
-		message = ajusterMessageBrute(message, matrice.length);
 
-		return chiffrageDeHill(matrice, message);
+		return chiffrementDeHill(matrice,
+				ajusterMessageBrute(message, matrice.length));
 	}
 
 	@Override
@@ -147,24 +147,29 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public String decoder(String message)
 	{
 		int[][] matriceInverse = null;
-		String decode = "";
+		String messageDecode = "";
 		boolean trouve = false;
 
+		// Parcours les matrices candidates
 		for (int i = 0; i < listeMatricesCandidates
 				.getNombreMatricesCandidates() && !trouve; i++)
 		{
 			listeMatricesCandidates.choisirMatriceCourante(i);
 			matriceInverse = listeMatricesCandidates
 					.getMatriceCouranteInverseHill();
+			matriceInverse = MatriceUtilitaires.getMatModuloX(matriceInverse,
+					vecCaracteres.getTaille());
 
-			decode = chiffrageDeHill(matriceInverse, message);
-			trouve = validerMessageSelonDico(decode, POURCENTAGE_ACCEPTABLE);
+			// Décode le message et le vérifie selon le dico
+			messageDecode = chiffrementDeHill(matriceInverse, message);
+			trouve = validerMessageSelonDico(messageDecode,
+					POURCENTAGE_ACCEPTABLE);
 		}
-		
-		return trouve ? decode : null;
+
+		return trouve ? messageDecode : null;
 	}
 
-	private String chiffrageDeHill(int[][] matrice, String message)
+	private String chiffrementDeHill(int[][] matrice, String message)
 	{
 		int valeurLettre = 0;
 		int longueur = message.length();
@@ -184,7 +189,8 @@ public class MessageChiffrerDechiffrer implements iCrypto
 							* vecCaracteres.getIndice(message.charAt(k));
 				}
 				// Ajoute le caractère au message final
-				messageFinal += vecCaracteres.getCaractere(valeurLettre % 28);
+				messageFinal += vecCaracteres
+						.getCaractere(valeurLettre % vecCaracteres.getTaille());
 				valeurLettre = 0;
 			}
 			message = message.substring(dimension);
