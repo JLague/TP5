@@ -195,9 +195,6 @@ public class ListeMatricesChiffrement implements iMatrice
 			setMatriceCourante(this.listeMatricesCandidates.get(index));
 		else
 			setMatriceCourante(null);
-
-		// setMatriceCourante(validerIndex(index) ?
-		// this.listeMatricesCandidates.get(index) : null);
 	}
 
 	@Override

@@ -114,10 +114,11 @@ public class MessageChiffrerDechiffrer implements iCrypto
 		for (String mot : mots)
 		{
 			// On compte aussi les espaces dans le pourcentage à la fin
-			count += this.dico.contains(mot) ? mot.length() + 1 : 0;
+			count += this.dico.contains(mot) ? mot.length() : 0;
 		}
 
-		return (double) count / message.length() >= pourcentageDeReussite;
+		return (double) count / message.length()
+				- (mots.length - 1) >= pourcentageDeReussite;
 	}
 
 	@Override
@@ -126,7 +127,7 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	{
 		while (MathUtilitaires.modulo(message.length(), diviseur) != 0)
 		{
-			message += " ";
+			message += CAR_DE_COMPLEMENT;
 		}
 
 		return message;
@@ -137,7 +138,6 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public String encoder(String message)
 	{
 		int[][] matrice = this.getMatriceCourante();
-
 		return chiffrementDeHill(matrice,
 				ajusterMessageBrute(message, matrice.length));
 	}
@@ -182,7 +182,8 @@ public class MessageChiffrerDechiffrer implements iCrypto
 			// Parcours chaque ligne de la matrice d'encryption
 			for (int j = 0; j < dimension; j++)
 			{
-				// Parcours chaque colonne de la matrice d'encryption
+				// Parcours chaque élément de chaque ligne de la matrice
+				// d'encryption
 				for (int k = 0; k < dimension; k++)
 				{
 					valeurLettre += matrice[j][k]

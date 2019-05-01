@@ -6,8 +6,8 @@ import utilitaires.MatriceUtilitaires;
 
 public class ListeMatricesChiffrement_SimpleTest
 {
-	private static final int MIN = 4;
-	private static final int MAX = 14;
+	private static final int MIN = 1;
+	private static final int MAX = 20;
 	private static final int DIM_MATRICE = 3;
 	private static final int COEFFICIENT_DANS_Z = 28;
 
@@ -30,7 +30,7 @@ public class ListeMatricesChiffrement_SimpleTest
 		System.out.println(
 				"getMatriceCouranteInverseHill : \n" + MatriceUtilitaires
 						.toStringMat(mc.getMatriceCouranteInverseHill()));
-
+/*
 		System.out.println(
 				"Boucle pour voir le PGCD de chaque matrice candidate avec le coefficient dans Z, devrait toujours être = 1 ...");
 		for (int i = 0; i < mc.getNombreMatricesCandidates(); i++)
@@ -43,7 +43,7 @@ public class ListeMatricesChiffrement_SimpleTest
 							COEFFICIENT_DANS_Z)
 					+ "], ");
 		}
-
+*/
 		System.out.println(
 				"\n\nBoucle pour voir 4 matrices ou moins de l'ensemble au hasard ...");
 		for (int i = 0; i < ((4 <= mc.getNombreMatricesCandidates()) ? 4
