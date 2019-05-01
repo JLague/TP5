@@ -2,7 +2,6 @@ package structures;
 
 import java.io.File;
 import java.util.SortedSet;
-import java.util.StringTokenizer;
 
 import exceptions.ConstructeurException;
 import utilitaires.FichierUtilitaires;
