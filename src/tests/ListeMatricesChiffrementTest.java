@@ -99,7 +99,7 @@ public class ListeMatricesChiffrementTest
 	public void testGetBorneInf()
 	{
 		assertTrue(liste.getBorneInf() == 0);
-	}
+	} 
 
 	@Test
 	public void testGetBorneSup()
