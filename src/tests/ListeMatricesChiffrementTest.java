@@ -165,12 +165,27 @@ public class ListeMatricesChiffrementTest
 	@Test
 	public void testGetCopieMatriceCourante()
 	{
+		// Cas Valide
 		liste.choisirMatriceCourante(1);
 		int[][] copie = liste.getCopieMatriceCourante();
 		int[][] copie2 = liste.getCopieMatriceCourante();
-		for(int i = 0; i < liste.getDimension(); i++)
+
+		for (int i = 0; i < liste.getDimension(); i++)
 		{
-			for(int j = 0; j < liste.getDimension(); j++)
+			for (int j = 0; j < liste.getDimension(); j++)
+			{
+				assertTrue(copie[i][j] == copie2[i][j]);
+			}
+		}
+		
+		//Cas invalide
+		
+		liste.choisirMatriceCourante(2);
+		copie2 = liste.getCopieMatriceCourante();
+		
+		for (int i = 0; i < liste.getDimension(); i++)
+		{
+			for (int j = 0; j < liste.getDimension(); j++)
 			{
 				assertTrue(copie[i][j] == copie2[i][j]);
 			}
