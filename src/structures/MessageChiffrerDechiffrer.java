@@ -112,12 +112,12 @@ public class MessageChiffrerDechiffrer implements iCrypto
 
 		for (String mot : mots)
 		{
-			// On compte aussi les espaces dans le pourcentage à la fin
 			count += this.dico.contains(mot) ? mot.length() : 0;
 		}
 
-		return (double) count / message.length()
-				- (mots.length - 1) >= pourcentageDeReussite;
+		// On enlève le nombre d'espaces
+		return (double) count / (message.length()
+				- (mots.length - 1)) >= pourcentageDeReussite;
 	}
 
 	@Override
@@ -194,9 +194,7 @@ public class MessageChiffrerDechiffrer implements iCrypto
 				valeurLettre = 0;
 			}
 			message = message.substring(dimension);
-
 		}
-
 		return messageFinal;
 	}
 
