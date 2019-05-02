@@ -147,19 +147,73 @@ public class ListeMatricesChiffrementTest
 	@Test
 	public void testChoisirMatriceCouranteInt()
 	{
-		for (int i = 0; i <= 10; i++)
+		// Cas valide
+		for (int test = 1; test < liste.getNombreMatricesCandidates(); test++)
 		{
+			liste.choisirMatriceCourante(test);
+			int[][] copie = liste.getCopieMatriceCourante();
+			int[][] copie2 = liste.getCopieMatriceCourante();
+			boolean diff = false;
 
-			liste.choisirMatriceCourante(i);
+			for (int i = 0; i < liste.getDimension(); i++)
+			{
+				for (int j = 0; j < liste.getDimension(); j++)
+				{
+					if (copie[i][j] != copie2[i][j])
+						diff = true;
+				}
+			}
 
-			ListeMatricesChiffrement mat = new ListeMatricesChiffrement(0, 15,
-					3, 28);
-			mat.choisirMatriceCourante(i);
-
-			assertTrue(liste.getCopieMatriceCourante()
-					.equals(mat.getCopieMatriceCourante()));
+			assertFalse(diff);
 		}
 
+		// Cas invalide
+
+		try
+		{
+			liste.choisirMatriceCourante(-1);
+			int[][] copie = liste.getCopieMatriceCourante();
+			int[][] copie2 = liste.getCopieMatriceCourante();
+			boolean diff = false;
+
+			for (int i = 0; i < liste.getDimension(); i++)
+			{
+				for (int j = 0; j < liste.getDimension(); j++)
+				{
+					if (copie[i][j] != copie2[i][j])
+						diff = true;
+				}
+			}
+
+			assertFalse(diff);
+			fail("la position de la matrice est négative");
+		}
+		catch (Exception e)
+		{
+		}
+
+		try
+		{
+			liste.choisirMatriceCourante(liste.getNombreMatricesCandidates());
+			int[][] copie = liste.getCopieMatriceCourante();
+			int[][] copie2 = liste.getCopieMatriceCourante();
+			boolean diff = false;
+
+			for (int i = 0; i < liste.getDimension(); i++)
+			{
+				for (int j = 0; j < liste.getDimension(); j++)
+				{
+					if (copie[i][j] != copie2[i][j])
+						diff = true;
+				}
+			}
+
+			assertFalse(diff);
+			fail("la position de la matrice est trop grande");
+		}
+		catch (Exception e)
+		{
+		}
 	}
 
 	@Test
@@ -169,35 +223,52 @@ public class ListeMatricesChiffrementTest
 		liste.choisirMatriceCourante(1);
 		int[][] copie = liste.getCopieMatriceCourante();
 		int[][] copie2 = liste.getCopieMatriceCourante();
+		boolean diff = false;
 
 		for (int i = 0; i < liste.getDimension(); i++)
 		{
 			for (int j = 0; j < liste.getDimension(); j++)
 			{
-				assertTrue(copie[i][j] == copie2[i][j]);
+				if (copie[i][j] != copie2[i][j])
+					diff = true;
 			}
 		}
-		
-		//Cas invalide
-		
+		assertFalse(diff);
+
+		// Cas invalide
+
 		liste.choisirMatriceCourante(2);
 		copie2 = liste.getCopieMatriceCourante();
-		
+		diff = false;
+
 		for (int i = 0; i < liste.getDimension(); i++)
 		{
 			for (int j = 0; j < liste.getDimension(); j++)
 			{
-				assertTrue(copie[i][j] == copie2[i][j]);
+				if (copie[i][j] != copie2[i][j])
+					diff = true;
 			}
 		}
+		assertTrue(diff);
 	}
 
 	@Test
 	public void testGetMatriceCouranteInverseHill()
 	{
 		int[][] mat = liste.getMatriceCouranteInverseHill();
-		
-		liste.get
+		int[][] copie = liste.getCopieMatriceCourante();
+		boolean diff = false;
+
+		for (int i = 0; i < liste.getDimension(); i++)
+		{
+			for (int j = 0; j < liste.getDimension(); j++)
+			{
+				if (mat[i][j] != copie[i][j])
+					diff = true;
+			}
+		}
+
+		assertTrue(diff);
 	}
 
 }
