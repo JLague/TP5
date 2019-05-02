@@ -273,36 +273,5 @@ public class ListeMatricesChiffrement implements iMatrice
 		}
 	}
 
-	public static void main(String[] args)
-	{
-<<<<<<< HEAD
-//		ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20, 3,
-//				28);
-//		System.out.println(liste.getNombreMatricesCandidates());
-//		System.out.println(
-//				MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-//		liste.choisirMatriceCourante(0);
-//		System.out.println(
-//				MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-//		System.out.println(MatriceUtilitaires
-//				.toStringMat(liste.getMatriceCouranteInverseHill()));
-		
-		ListeMatricesChiffrement list = new ListeMatricesChiffrement(0, 10, 3, 28);
-		
-		list.setBornes(15, 0);
-		System.out.println(list.getBorneInf() + "    " + list.getBorneSup());
-		
-		
 
-=======
-		 ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20,
-		 3, 28); System.out.println(liste.getNombreMatricesCandidates());
-		 System.out.println(
-		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-		 liste.choisirMatriceCourante(0); System.out.println(
-		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-		 System.out.println(MatriceUtilitaires
-		 .toStringMat(liste.getMatriceCouranteInverseHill()));
->>>>>>> branch 'master' of https://github.com/JLague/TP5.git
-	}
 }
