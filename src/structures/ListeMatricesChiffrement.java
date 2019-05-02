@@ -260,7 +260,7 @@ public class ListeMatricesChiffrement implements iMatrice
 			// Remplie la matrice avec la combinaison
 			for (int j = 0; j < dimension * dimension; j++)
 			{
-					matrice[j / dimension][j % dimension] = (int) temp[j];
+				matrice[j / dimension][j % dimension] = (int) temp[j];
 			}
 
 			// Si la matrice est candidate, l'ajouter à la liste
@@ -275,6 +275,7 @@ public class ListeMatricesChiffrement implements iMatrice
 
 	public static void main(String[] args)
 	{
+<<<<<<< HEAD
 //		ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20, 3,
 //				28);
 //		System.out.println(liste.getNombreMatricesCandidates());
@@ -293,5 +294,15 @@ public class ListeMatricesChiffrement implements iMatrice
 		
 		
 
+=======
+		 ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20,
+		 3, 28); System.out.println(liste.getNombreMatricesCandidates());
+		 System.out.println(
+		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
+		 liste.choisirMatriceCourante(0); System.out.println(
+		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
+		 System.out.println(MatriceUtilitaires
+		 .toStringMat(liste.getMatriceCouranteInverseHill()));
+>>>>>>> branch 'master' of https://github.com/JLague/TP5.git
 	}
 }
