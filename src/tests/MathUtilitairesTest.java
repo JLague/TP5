@@ -120,7 +120,8 @@ public class MathUtilitairesTest
 	public void testXPremierEntreEux()
 	{
 		SortedSet<Integer> premiers26 = MathUtilitaires.xPremierEntreEux(1, 26);
-		SortedSet<Integer> premiersMoins1Et26 = MathUtilitaires.xPremierEntreEux(-1, 26);
+		SortedSet<Integer> premiersMoins1Et26 = MathUtilitaires
+				.xPremierEntreEux(-1, 26);
 
 		for (int nb : PREMIERS_ENTRE_1_ET_26)
 		{
@@ -129,15 +130,15 @@ public class MathUtilitairesTest
 
 		assertTrue(premiers26.size() == PREMIERS_ENTRE_1_ET_26.length);
 		assertEquals(premiers26, premiersMoins1Et26);
-		
+
 		assertEquals(MathUtilitaires.xPremierEntreEux(1, 1), null);
 	}
 
 	@Test
 	public void testAlea()
 	{
-//		int borne1 = 0;
-//		int borne2 = 0;
+		// int borne1 = 0;
+		// int borne2 = 0;
 
 		boucleAleatoire(0, 1);
 		boucleAleatoire(1, 0);

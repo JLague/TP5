@@ -68,7 +68,7 @@ public class VecteurDeCaracteresTest
 		catch (ArrayIndexOutOfBoundsException e)
 		{
 		}
-		
+
 		try
 		{
 			v1.getCaractere(v1.getTaille());
@@ -85,7 +85,7 @@ public class VecteurDeCaracteresTest
 		assertEquals(v1.getIndice('A'), 0);
 		assertEquals(v1.getIndice(' '), 26);
 		assertEquals(v1.getIndice('a'), -1);
-		
+
 		assertEquals(v2.getIndice('B'), -1);
 		assertEquals(v2.getIndice('b'), -1);
 		assertEquals(v2.getIndice('Y'), 12);

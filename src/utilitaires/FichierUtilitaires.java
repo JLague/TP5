@@ -34,7 +34,7 @@ public class FichierUtilitaires
 	{
 		boolean enregistre = false;
 		PrintWriter sortie = null;
-		
+
 		if (message != null)
 		{
 			try
@@ -100,7 +100,7 @@ public class FichierUtilitaires
 		try
 		{
 			entree = new BufferedReader(new FileReader(nomDic));
-			
+
 			while ((ligne = entree.readLine()) != null)
 			{
 				dictionnaire.add(ligne.trim().toLowerCase());

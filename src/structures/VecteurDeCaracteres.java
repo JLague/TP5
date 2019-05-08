@@ -74,16 +74,16 @@ public class VecteurDeCaracteres
 	public char getCaractere(int index) throws ArrayIndexOutOfBoundsException
 	{
 		char c = ' ';
-		
+
 		try
 		{
 			c = this.tableCaracteres.get(index);
 		}
-		catch(IndexOutOfBoundsException e)
+		catch (IndexOutOfBoundsException e)
 		{
 			throw new ArrayIndexOutOfBoundsException();
 		}
-		
+
 		return c;
 	}
 
@@ -110,7 +110,7 @@ public class VecteurDeCaracteres
 	{
 		return this.tableCaracteres.size();
 	}
-	
+
 	/**
 	 * Valide le tableau de caractères passé en paramètre
 	 * 

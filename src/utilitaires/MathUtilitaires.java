@@ -47,8 +47,11 @@ public class MathUtilitaires
 	public static int modulo(int pVal, int pMod) throws ArithmeticException
 	{
 		int valeur = 0;
-		if(pMod != 0)
+		if (pMod != 0)
 			valeur = (pVal % pMod + pMod) % pMod;
+
+		else
+			throw new ArithmeticException();
 
 		return valeur;
 	}

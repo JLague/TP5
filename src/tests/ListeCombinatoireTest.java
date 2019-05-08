@@ -57,7 +57,6 @@ public class ListeCombinatoireTest
 		catch (ConstructeurException e)
 		{
 		}
-		
 
 		try
 		{
@@ -75,10 +74,10 @@ public class ListeCombinatoireTest
 	{
 		List<Integer> ensemble1 = l1.genererEnsembleValeurs();
 		List<Integer> ensemble2 = l2.genererEnsembleValeurs();
-		
+
 		assertEquals(ensemble1.size(), l1.getFinEns() - l1.getDebutEns() + 1);
 		assertEquals(ensemble2.size(), l2.getFinEns() - l2.getDebutEns() + 1);
-		
+
 		// Test visuel
 		System.out.println(ensemble1);
 		System.out.println(ensemble2);

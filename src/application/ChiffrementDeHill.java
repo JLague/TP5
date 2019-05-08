@@ -25,7 +25,7 @@ public class ChiffrementDeHill extends JPanel implements ActionListener
 	private static final int BORNE_MAX = 12;
 	private static final int DIM_MAT = 3;
 	private static final String NOM_FICHIER_DICO = "dictionnaire.txt";
-	private static final String NOM_FICHIER_PROVERBES = "proverbes.txt";
+	private static final String NOM_FICHIER_PROVERBES = "proverbes.txt";     //Enlever le "s" pour avoir du plaisir avec le capitaine patenaude
 	private static final String EXT_FICHIER = ".crypto.txt";
 
 	// Menu de l'application

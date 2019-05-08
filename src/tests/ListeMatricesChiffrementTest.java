@@ -8,7 +8,6 @@ import org.junit.Test;
 import exceptions.ConstructeurException;
 import structures.ListeMatricesChiffrement;
 
-
 public class ListeMatricesChiffrementTest
 {
 	ListeMatricesChiffrement liste;
