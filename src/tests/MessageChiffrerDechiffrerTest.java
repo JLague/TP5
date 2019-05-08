@@ -8,8 +8,6 @@ import java.util.SortedSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
 import exceptions.ConstructeurException;
 import structures.ListeMatricesChiffrement;
 import structures.MessageChiffrerDechiffrer;
@@ -18,7 +16,6 @@ import utilitaires.FichierUtilitaires;
 
 public class MessageChiffrerDechiffrerTest
 {
-	// pas encore fait
 	VecteurDeCaracteres vec;
 	ListeMatricesChiffrement mat;
 	SortedSet<String> dico;
