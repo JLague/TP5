@@ -107,29 +107,46 @@ public class MessageChiffrerDechiffrer implements iCrypto
 	public boolean validerMessageSelonDico(String message,
 			float pourcentageDeReussite)
 	{
-		String[] mots = message.toLowerCase().split(" ");
+		String[] mots = null;
 		int count = 0;
+		boolean total = false;
 
-		for (String mot : mots)
+		if (message != null && message.length() > 0 && pourcentageDeReussite > 0
+				&& pourcentageDeReussite <= 1)
 		{
-			count += this.dico.contains(mot) ? mot.length() : 0;
-		}
+			mots = message.toLowerCase().split(" ");
+			count = 0;
 
-		// On enlève le nombre d'espaces
-		return (double) count / (message.length()
-				- (mots.length - 1)) >= pourcentageDeReussite;
+			for (String mot : mots)
+			{
+				count += this.dico.contains(mot) ? mot.length() : 0;
+			}
+
+			// On enlève le nombre d'espac
+			total = (double) count / (message.length()
+					- (mots.length - 1)) >= pourcentageDeReussite;
+
+		}
+		return total;
 	}
 
 	@Override
 	// TODO ajusterMessageBrute - Compléter le code de la méthode
 	public String ajusterMessageBrute(String message, int diviseur)
 	{
-		while (MathUtilitaires.modulo(message.length(), diviseur) != 0)
+		String messageFinal = "";
+
+		if (message != null && diviseur < message.length())
 		{
-			message += CAR_DE_COMPLEMENT;
+			while (MathUtilitaires.modulo(message.length(), diviseur) != 0)
+			{
+				message += CAR_DE_COMPLEMENT;
+			}
+
+			messageFinal = message;
 		}
 
-		return message;
+		return messageFinal;
 	}
 
 	@Override

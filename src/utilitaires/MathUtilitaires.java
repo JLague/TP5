@@ -46,12 +46,11 @@ public class MathUtilitaires
 	// TODO modulo - Compléter le code de la méthode
 	public static int modulo(int pVal, int pMod) throws ArithmeticException
 	{
-		// return pVal - pMod * Math.floorDiv(pVal, pMod);
+		int valeur = 0;
+		if(pMod != 0)
+			valeur = (pVal % pMod + pMod) % pMod;
 
-		// Solution à Alex
-		// return pVal * pMod > 0 ? pVal % pMod : pVal + (pVal % pMod);
-
-		return (pVal % pMod + pMod) % pMod;
+		return valeur;
 	}
 
 	/**
