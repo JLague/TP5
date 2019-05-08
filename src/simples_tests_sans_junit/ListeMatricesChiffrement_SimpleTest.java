@@ -1,7 +1,6 @@
 package simples_tests_sans_junit;
 
 import structures.ListeMatricesChiffrement;
-import utilitaires.MathUtilitaires;
 import utilitaires.MatriceUtilitaires;
 
 public class ListeMatricesChiffrement_SimpleTest
