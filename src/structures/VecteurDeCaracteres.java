@@ -138,11 +138,4 @@ public class VecteurDeCaracteres
 	{
 		return "Table de correspondance = " + this.tableCaracteres;
 	}
-	
-	public static void main(String[] args)
-	{
-		VecteurDeCaracteres vec = new VecteurDeCaracteres();
-		System.out.println(vec.getTaille());
-		System.out.println(vec.getCaractere(2455 % 27));
-	}
 }

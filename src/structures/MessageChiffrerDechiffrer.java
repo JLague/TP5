@@ -197,17 +197,4 @@ public class MessageChiffrerDechiffrer implements iCrypto
 		}
 		return messageFinal;
 	}
-
-	public static void main(String[] args)
-	{
-		MessageChiffrerDechiffrer m = new MessageChiffrerDechiffrer(
-				new VecteurDeCaracteres(),
-				new ListeMatricesChiffrement(1, 20, 2, 28), FichierUtilitaires
-						.lireDictionnaire(new File("dictionnaire.txt")));
-
-		String message = "ceci est un test";
-		String e = m.encoder(message);
-		System.out.println(e);
-		System.out.println(m.decoder(e));
-	}
 }

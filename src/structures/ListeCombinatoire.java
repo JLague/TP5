@@ -252,11 +252,4 @@ public class ListeCombinatoire
 				+ getTailleListeDeCombinaisons() + " combinaisons : "
 				+ getListeDeCombinaisons();
 	}
-
-	public static void main(String[] args)
-	{
-		ListeCombinatoire liste = new ListeCombinatoire(1, 5, 3);
-
-		System.out.println(liste);
-	}
 }

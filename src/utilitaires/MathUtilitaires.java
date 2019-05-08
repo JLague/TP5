@@ -231,13 +231,4 @@ public class MathUtilitaires
 				/ MathUtilitaires.fact(nbrElement - nbrElementPris))
 				/ MathUtilitaires.fact(nbrElementPris));
 	}
-
-	public static void main(String[] args)
-	{
-		System.out.println(modulo(265, 16));
-		System.out.println(xPremierEntreEux(0, 28));
-		System.out.println((-1 % 19 + 19));
-		System.out.println(modulo(-1, 19));
-		System.out.println(modulo(-27, 27));
-	}
 }
