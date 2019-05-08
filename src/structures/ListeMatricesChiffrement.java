@@ -15,7 +15,8 @@ import exceptions.ConstructeurException;
  * Utilise la classe "ListeCombinatoire" pour générer les combinaisons de
  * valeurs potentielles pour former les matrices.
  *
- * @author Vos noms
+ * @author Dylan Renaud
+ * @author Billy Lagüe
  *
  */
 public class ListeMatricesChiffrement implements iMatrice
