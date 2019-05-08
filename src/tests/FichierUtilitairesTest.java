@@ -1,4 +1,4 @@
-package utilitaires;
+package tests;
 
 import static org.junit.Assert.*;
 
