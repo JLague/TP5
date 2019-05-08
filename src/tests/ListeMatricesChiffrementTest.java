@@ -2,14 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.ConstructeurException;
 import structures.ListeMatricesChiffrement;
-import utilitaires.MatriceUtilitaires;
+
 
 public class ListeMatricesChiffrementTest
 {
