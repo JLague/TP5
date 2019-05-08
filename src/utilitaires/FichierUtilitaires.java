@@ -100,25 +100,15 @@ public class FichierUtilitaires
 		try
 		{
 			entree = new BufferedReader(new FileReader(nomDic));
+			
 			while ((ligne = entree.readLine()) != null)
 			{
 				dictionnaire.add(ligne.trim().toLowerCase());
 			}
+			entree.close();
 		}
-		catch (IOException e)
+		catch (IOException | NullPointerException e)
 		{
-			System.err.println(e);
-		}
-		finally
-		{
-			try
-			{
-				entree.close();
-			}
-			catch (IOException e)
-			{
-				System.err.println(e);
-			}
 		}
 
 		return dictionnaire.isEmpty() ? null : dictionnaire;

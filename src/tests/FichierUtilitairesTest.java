@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.SortedSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class FichierUtilitairesTest
 	public static final File TEST = new File("test.txt");
 	public static final File VIDE = new File("vide.txt");
 	public static final File INVALIDE = new File("aucunFichierDeCeNom.txt");
-	
+
 	@Before
 	public void setUp()
 	{
@@ -31,22 +32,22 @@ public class FichierUtilitairesTest
 		assertTrue(FichierUtilitaires.enregistrerMessage(MESSAGE, TEST));
 		assertEquals(MESSAGE.substring(0, MESSAGE.indexOf("\n")),
 				FichierUtilitaires.lireMessage(TEST));
-		
+
 		// Message vide et fichier valide
 		assertTrue(FichierUtilitaires.enregistrerMessage("", VIDE));
 		assertEquals(FichierUtilitaires.lireMessage(VIDE), "");
-		
+
 		// Message vide et fichier invalide (crée le fichier)
 		assertTrue(FichierUtilitaires.enregistrerMessage("", INVALIDE));
 		assertFalse(FichierUtilitaires.lireMessage(TEST).equals(""));
 		INVALIDE.delete();
-		
+
 		// Message null et fichier valide
 		assertFalse(FichierUtilitaires.enregistrerMessage(null, TEST));
-		
+
 		// Message null et fichier invalide
 		assertFalse(FichierUtilitaires.enregistrerMessage(null, INVALIDE));
-		
+
 		// Fichier invalide
 		assertTrue(FichierUtilitaires.enregistrerMessage(MESSAGE, INVALIDE));
 		INVALIDE.delete();
@@ -60,13 +61,12 @@ public class FichierUtilitairesTest
 				FichierUtilitaires.lireMessage(TEST));
 
 		// Aucun fichier de ce nom
-		assertNull(FichierUtilitaires
-				.lireMessage(INVALIDE));
-		
+		assertNull(FichierUtilitaires.lireMessage(INVALIDE));
+
 		// Fichier null
-		
+
 		assertNull(FichierUtilitaires.lireMessage(null));
-		
+
 		// Message vide
 		assertEquals("", FichierUtilitaires.lireMessage(VIDE));
 
@@ -75,6 +75,14 @@ public class FichierUtilitairesTest
 	@Test
 	public void testLireDictionnaire()
 	{
-		fail("Not yet implemented");
+		// Dictionnaire valide
+		assertTrue(FichierUtilitaires
+				.lireDictionnaire(new File("dictionnaire.txt")) != null);
+
+		// Dictionnaire non valide
+		assertNull(FichierUtilitaires.lireDictionnaire(INVALIDE));
+
+		// Dictionnaire vide
+		assertTrue(FichierUtilitaires.lireDictionnaire(VIDE) != null);
 	}
 }
