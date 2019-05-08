@@ -114,9 +114,9 @@ public class ListeMatricesChiffrement implements iMatrice
 
 	private void setBornes(int pBorneInf, int pBorneSup)
 	{
-		boolean ok = validerBornes(pBorneInf = Math.min(pBorneInf, pBorneSup),
-				pBorneSup = Math.max(pBorneInf, pBorneSup));
-
+		pBorneInf = pBorneInf > pBorneSup ? pBorneSup ^ pBorneInf ^ (pBorneSup = pBorneInf) : pBorneInf;
+		boolean ok = validerBornes(pBorneInf, pBorneSup);
+		
 		if (ok)
 		{
 			this.borneInf = pBorneInf;
@@ -273,15 +273,5 @@ public class ListeMatricesChiffrement implements iMatrice
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		 ListeMatricesChiffrement liste = new ListeMatricesChiffrement(1, 20,
-		 3, 28); System.out.println(liste.getNombreMatricesCandidates());
-		 System.out.println(
-		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-		 liste.choisirMatriceCourante(0); System.out.println(
-		 MatriceUtilitaires.toStringMat(liste.getMatriceCourante()));
-		 System.out.println(MatriceUtilitaires
-		 .toStringMat(liste.getMatriceCouranteInverseHill()));
-	}
+
 }
