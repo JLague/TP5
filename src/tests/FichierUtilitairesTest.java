@@ -60,7 +60,6 @@ public class FichierUtilitairesTest
 				FichierUtilitaires.lireMessage(TEST));
 
 		// Aucun fichier de ce nom
-		System.out.println(FichierUtilitaires.lireMessage(INVALIDE));
 		assertNull(FichierUtilitaires
 				.lireMessage(INVALIDE));
 		
