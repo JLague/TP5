@@ -34,21 +34,21 @@ public class FichierUtilitaires
 	{
 		boolean enregistre = false;
 		PrintWriter sortie = null;
+		
+		if (message != null)
+		{
+			try
+			{
+				sortie = new PrintWriter(new FileWriter(nomFichier));
+				sortie.println(message);
+				enregistre = true;
 
-		try
-		{
-			sortie = new PrintWriter(new FileWriter(nomFichier));
-			sortie.println(message);
-			enregistre = true;
-		}
-		catch (IOException e)
-		{
-			System.err.println(e);
-		}
-		finally
-		{
-			sortie.flush();
-			sortie.close();
+				sortie.flush();
+				sortie.close();
+			}
+			catch (IOException | NullPointerException e)
+			{
+			}
 		}
 
 		return enregistre;
@@ -71,21 +71,10 @@ public class FichierUtilitaires
 		{
 			entree = new BufferedReader(new FileReader(nomFichier));
 			ligne = entree.readLine();
+			entree.close();
 		}
-		catch (IOException e)
+		catch (IOException | NullPointerException e)
 		{
-			System.err.println(e);
-		}
-		finally
-		{
-			try
-			{
-				entree.close();
-			}
-			catch (IOException e)
-			{
-				System.err.println(e);
-			}
 		}
 
 		return ligne;
